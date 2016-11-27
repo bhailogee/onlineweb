@@ -1,0 +1,9 @@
+﻿{
+	"middlewares": {
+		"security": {
+			"path": "security/security.js"
+		}
+	},
+	"activelayers": [ "security" ]
+
+}

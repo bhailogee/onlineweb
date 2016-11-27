@@ -1,0 +1,45 @@
+<div class="modal" style="display:{{displayPopUp}};" id="revokeGUIMenuFromRole" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Revoke G U I Menu From Role</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <!--<div class="row">-->
+                    <!--<div class="col-sm-2"/>-->
+                    <!--<div class="col-sm-4">-->
+                        <!--<label title=GUIMenuID>G U I Menu : </label>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-4">-->
+                        <!--<dropdown-directive model="GUIMenuID" datasource="roleguimenus_f1" textfield="v_GUIMenuID"-->
+                                            <!--valuefield="v_GUIMenuID"-->
+                                            <!--groupfield="v_ParentGUIMenuID"></dropdown-directive>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-2"/>-->
+                <!--</div>-->
+
+
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fnrevokeGUIMenuFromRole();">Revoke<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div div class="fieldset ng-scope">
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#revokeGUIMenuFromRole">Revoke GUI Menu From Role
+    </button>
+
+</div>

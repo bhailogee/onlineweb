@@ -1,0 +1,436 @@
+<div class="modal" style="display:{{displayPopUp}};" id="insertVendorPolicy" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="updatePrevious(); displayPopUp = 'none';" type="button"
+                        ng-class="{'close':showasmodal}" data-dismiss="modal" aria-label="Close" class="ng-scope close">
+                    <span aria-hidden="true">×</span></button>
+                <h2 class="modal-title">Insert Vendor Policy</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Policy Name : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="PolicyName"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=VendorID>Vendors : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="VendorID" datasource="LS_vendors" textfield="v_VendorName"
+                                            valuefield="v_VendorID" isnull=true></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyMatchingTypeID>Policy Matching Type : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="PolicyMatchingTypeID" datasource="LS_policymatchingtypes"
+                                            textfield="v_PolicyMatchingType"
+                                            valuefield="v_PolicyMatchingTypeID"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="PolicyMatchingTypeID == 3">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PrefixLength>Prefix Length : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="PrefixLength"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyTypeID>Policy Type : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="PolicyTypeID" datasource="LS_policytypes"
+                                            textfield="v_PolicyTypeName"
+                                            valuefield="v_PolicyTypeID"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=ServiceGroupID>Service Group : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="ServiceGroupID" datasource="LS_servicegroups"
+                                            textfield="v_ServiceGroupName"
+                                            valuefield="v_ServiceGroupID"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=EffectiveDate>Effective Date : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#"
+                           href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       data-ng-model="EffectiveDate = (EffectiveDate | date:'yyyy-MM-dd HH:mm:ss')">
+								<span class="input-group-addon" ng-click="EffectiveDate=''">
+						            <i class="glyphicon glyphicon-refresh"></i>
+						        </span>
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="EffectiveDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=ExpiryDate>Expiry Date : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#"
+                           href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       data-ng-model="ExpiryDate = (ExpiryDate | date:'yyyy-MM-dd HH:mm:ss')">
+								<span class="input-group-addon" ng-click="ExpiryDate=''">
+						            <i class="glyphicon glyphicon-refresh"></i>
+						        </span>
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="ExpiryDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdown1' }"/>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=VersionNumber>Version Number : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="VersionNumber"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=Status>Status : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="checkbox" ng-model="Status"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=IsCharging>Is This Policy Used for Charging.? : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="checkbox" ng-model="IsCharging"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div ng-show="IsCharging">
+                    <h4 style="text-align: center;">This Policy is Used for Charging</h4>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=CurrencyID>Currency : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <dropdown-directive model="CurrencyID" datasource="LS_currencies" textfield="v_CurrencyName"
+                                                valuefield="v_CurrencyID"></dropdown-directive>
+                        </div>
+                        <div class="col-sm-2"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=ChargeHeadID>Charge Head : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <dropdown-directive model="ChargeHeadID" datasource="chargeheads_f2"
+                                                textfield="v_ChargeHeadName" valuefield="v_ChargeHeadID"
+                                                isnull=true></dropdown-directive>
+                        </div>
+                        <div class="col-sm-2"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=ZoneBased>Multiplier : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="Multiplier" value="1"/>
+                        </div>
+                        <div class="col-sm-2"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=NoRating>No Rating : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <input type="radio" ng-model="PolicyRateType" value="NoRating"/>
+                        </div>
+                        <div class="col-sm-2"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=Flat>Flat : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <input type="radio" ng-model="PolicyRateType" value="Flat"/>
+                        </div>
+                        <div class="col-sm-2"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=ZoneBased>Zone Based : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <input type="radio" ng-model="PolicyRateType" value="ZoneBased"/>
+                        </div>
+                        <div class="col-sm-2"/>
+                    </div>
+
+                    <h4 ng-show="PolicyRateType == 'Flat'" style="text-align: center;">Flat Rating GUI Charging
+                        Basis.</h4>
+                    <h4 ng-show="PolicyRateType == 'ZoneBased'" style="text-align: center;">Zone Based Rating GUI
+                        Charging Basis.</h4>
+
+                    <h4 style="text-align: center;" ng-hide="PolicyRateType == 'NoRating'"></h4>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4" ng-hide="PolicyRateType == 'NoRating'">
+                            <label title=Duration>Duration : </label>
+                        </div>
+
+                        <div class="col-sm-4" ng-show="PolicyRateType == 'Flat'">
+                            <input type="radio" ng-model="ChargingBasis" value="Duration"/>
+                        </div>
+                        <div class="col-sm-4" ng-show="PolicyRateType == 'ZoneBased'">
+                            <input type="checkbox" ng-model="DurationBasedCharging" ng-true-value="'Duration'"/>
+                        </div>
+
+                        <div class="col-sm-2"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4" ng-hide="PolicyRateType == 'NoRating'">
+                            <label title=Usage>Usage : </label>
+                        </div>
+
+                        <div class="col-sm-4" ng-show="PolicyRateType == 'Flat'">
+                            <input type="radio" ng-model="ChargingBasis" value="Usage"/>
+                        </div>
+                        <div class="col-sm-4" ng-show="PolicyRateType == 'ZoneBased'">
+                            <input type="checkbox" ng-model="UsageBasedCharging" ng-true-value="'Usage'"/>
+                        </div>
+
+                        <div class="col-sm-2"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4" ng-hide="PolicyRateType == 'NoRating'">
+                            <label title=Event>Event : </label>
+                        </div>
+
+                        <div class="col-sm-4" ng-show="PolicyRateType == 'Flat'">
+                            <input type="radio" ng-model="ChargingBasis" value="Event"/>
+                        </div>
+                        <div class="col-sm-4" ng-show="PolicyRateType == 'ZoneBased'">
+                            <input type="checkbox" ng-model="EventBasedCharging" ng-true-value="'Event'"/>
+                        </div>
+
+                        <div class="col-sm-2"/>
+                    </div>
+
+                    <div ng-show="ChargingBasis == 'Duration' || DurationBasedCharging == 'Duration'">
+                        <h4 style="text-align: center;">Duration Base Charging.</h4>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=DurationBlockSize>Duration Block Size : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="DurationBlockSize"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=DurationBlockName>Duration Block Name : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="DurationBlockName"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=MinimumChargeableDuration>Minimum Chargeable Duration : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="MinimumChargeableDuration"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=ConnCharges>Connection Charges : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="ConnCharges"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=FirstInt>First Int : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="FirstInt"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=NextInt>Next Int : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="NextInt"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                    <div ng-show="ChargingBasis == 'Usage' || UsageBasedCharging == 'Usage'">
+                        <h4 style="text-align: center;">Usage Base Charging.</h4>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=BlockSize>Block Size : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="BlockSize"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <label title=BlockName>Block Name : </label>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="BlockName"/>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fninsertVendorPolicy();"
+                   data-dismiss="modal">Insert<span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input validation-reset="Form" value="Close" class="btn ng-scope" type="button" data-dismiss="modal"
+                       ng-click="displayPopUp = 'none';" aria-label="Close">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#insertVendorPolicy">Insert Vendor Policy
+    </button>
+
+</div>

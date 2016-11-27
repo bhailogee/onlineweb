@@ -1,0 +1,167 @@
+<div style="margin-top:20px;" class="fieldset ng-scope" ng-hide="nextPage">
+    <h1 class="legend ng-binding"> Cancel vouchers </h1>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <label title=PrepaidCardSeriesID>Batch Name : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <dropdown-directive model="PrepaidCardSeriesID" datasource="DB_GetAvailablePrepaidcards" refresh=true
+                                textfield="v_BatchName" valuefield="v_PrepaidCardSeriesID" isnull=true
+                                onddchange=getValueOfBatch/>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row" ng-show="SerialPrefix">
+        <div class="col-sm-2"/>
+        <div class="col-sm-10">
+            <h3>Voucher's Detail Information</h3>
+        </div>
+    </div>
+
+    <div class="row" ng-show="SerialPrefix">
+        <div class="col-sm-3"/>
+        <div class="col-sm-4">
+            <label title=DealerID>Serial Prefix : </label>
+        </div>
+
+        <div class="col-sm-4">
+            {{SerialPrefix}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="Amount">
+        <div class="col-sm-3"/>
+        <div class="col-sm-4">
+            <label title=DealerID>Amount : </label>
+        </div>
+
+        <div class="col-sm-4">
+            {{Amount}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="DealerName">
+        <div class="col-sm-3"/>
+        <div class="col-sm-4">
+            <label title=DealerCardSaleID>Dealer Name : </label>
+        </div>
+
+        <div class="col-sm-4">
+            {{DealerName}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="EndingSerialNumber">
+        <div class="col-sm-3"/>
+        <div class="col-sm-4">
+            <label title=TotalSerialNumber>Total Serial Number : </label>
+        </div>
+
+        <div class="col-sm-4">
+            {{EndingSerialNumber - StartingSerialNumber + 1}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="StartingSerialNumber">
+        <div class="col-sm-3"/>
+        <div class="col-sm-4">
+            <label title=StartingSerialNumber>Starting Serial Number : </label>
+        </div>
+
+        <div class="col-sm-4">
+            {{StartingSerialNumber}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="EndingSerialNumber">
+        <div class="col-sm-3"/>
+        <div class="col-sm-4">
+            <label title=EndingSerialNumber>Ending Serial Number : </label>
+        </div>
+
+        <div class="col-sm-4">
+            {{EndingSerialNumber}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="SerialPrefix">
+        <div class="col-sm-2"/>
+        <div class="col-sm-10">
+            <h3>Voucher's Satus</h3>
+        </div>
+    </div>
+
+    <div class="row" ng-show="Amount">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-2">
+            <label>Fresh = </label> {{Freshed}}
+        </div>
+
+        <div class="col-sm-2">
+            <label>Sold = </label> {{Sold}}
+        </div>
+
+        <div class="col-sm-2">
+            <label>Canceled = </label> {{Canceled}}
+        </div>
+        <div class="col-sm-3"/>
+    </div>
+
+    <div class="row" style="margin-top:10px;" ng-show="SerialPrefix">
+        <div class="col-sm-6"/>
+        <div class="col-sm-6">
+            <a class="btn btn-primary" type="button" ng-click="fnblkCancelSeries()">Cancel <span
+                    class="glyphicon glyphicon-remove"></span></a>
+        </div>
+    </div>
+
+</div>
+
+<div ng-show="nextPage">
+
+    <div style="margin-top:3%;" class="fieldset ng-scope">
+        <h2 class="legend ng-binding"> Vouchers Cancelling Response </h2>
+
+        <div class="row" ng-show="returnCode > 0">
+            <p style="text-align:center">
+                Error While Selling vouchers.
+                Error Code = {{returnCode}}.
+            </p>
+
+            <h4 ng-click="nextPage=false;returnCode=' ';"
+                style="text-decoration: underline; cursor:pointer; color: blue; text-align:center;">Please Click Here To
+                Try Again.</h4>
+        </div>
+
+        <div class="row" ng-hide="returnCode == 0 || returnCode > 0">
+
+            <div class="col-sm-12">
+
+                <h4 style="text-align:center;">
+                    Please Wait your vouchers are Cancelling.
+                </h4>
+
+            </div>
+
+            <div class="col-sm-12" style="text-align:center;">
+                <img src="/images/FileProcess.gif" alt="File Process Icon">
+            </div>
+
+        </div>
+
+        <div class="row" ng-show="returnCode==0">
+
+            <div class="col-sm-12">
+
+                <h4 style="text-align:center;">
+                    Your Vouchers has been Cancelled.
+                </h4>
+
+            </div>
+        </div>
+    </div>
+</div>

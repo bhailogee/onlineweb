@@ -1,0 +1,138 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">Rates Time of Day & Day of Week</h1>
+
+            <div ng-if="listdayofweetimeofdaykpanel.gridOpts">
+                <div ui-grid="listdayofweetimeofdaykpanel.gridOpts" ui-grid-pagination ui-grid-selection
+                     ui-grid-exporter class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#insertDOWTOD">Insert Day of Week & Time Of Day
+    </button>
+
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="insertDOWTOD" role="dialog">
+    <div class="modal-dialog" style="width:60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="displayPopUp = 'none'; displayUpdatePopUp = false;" type="button"
+                        ng-class="{'close':showasmodal}" aria-label="Close" class="ng-scope close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span></button>
+                <h2 class="modal-title" style="text-align: center;">Day of Week & Time Of Day</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=PolicyRatingClassID>Policy Rating Class : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        {{RatingClassName}}
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row">
+
+                    <h4 style="text-align: center;"> Day of Week & Time of day </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">From Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">From Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">To Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">To Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                        </div>
+                        <div class="row" ng-show="displayUpdatePopUp == true">
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                            <div class="col-sm-2" style="text-align: center;">
+                                {{FromTime}}
+                            </div>
+                            <div class="col-sm-2" style="text-align: center;">
+                                {{FromDay}}
+                            </div>
+                            <div class="col-sm-2" style="text-align: center;">
+                                {{ToTime}}
+                            </div>
+                            <div class="col-sm-2" style="text-align: center;">
+                                {{ToDay}}
+                            </div>
+                            <div class="col-sm-2" style="text-align: center;">
+                                {{RatePerBlock}}
+                            </div>
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                        </div>
+                        <div class="row" ng-repeat="dowtod in dowtods">
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true">
+                                <button class="addfields" ng-show="$last" ng-click="addDOWTOD()">+</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="dowtod.startTime" datasource="{{startTime}}"
+                                                    textfield="startTimeName"
+                                                    valuefield="startTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="dowtod.startDay" datasource="{{dayEnum}}" textfield="DayName"
+                                                    valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="dowtod.endTime" datasource="{{endTime}}"
+                                                    textfield="endTimeName"
+                                                    valuefield="endTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="dowtod.endDay" datasource="{{dayEnum}}" textfield="DayName"
+                                                    valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" style="width:70px;" ng-model="dowtod.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true">
+                                <button class="removefields" ng-show="$last" ng-click="removeDOWTOD()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-hide="displayUpdatePopUp == true" ng-click="ratesDOWTOD();">Insert<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <a class="btn btn-primary" type="button" ng-show="displayUpdatePopUp == true"
+                   ng-click="updateRatesDOWTOD();">Update<span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input validation-reset="Form" value="Close" class="btn ng-scope" type="button"
+                       ng-click=" displayPopUp = 'none'; displayUpdatePopUp = false;" aria-label="Close"
+                       data-dismiss="modal">
+            </div>
+        </div>
+    </div>
+</div>

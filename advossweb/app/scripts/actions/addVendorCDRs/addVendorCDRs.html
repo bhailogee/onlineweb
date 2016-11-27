@@ -1,0 +1,171 @@
+<div class="modal" style="display:{{displayPopUp}};" id="vendorCDRs" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" style="text-align:center">Import Vendor CDRs</h2>
+            </div>
+
+            <div class="modal-body" ng-show="fileReadBoolean == false">
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=VendorTrunkID>Vendor Trunk : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="VendorTrunkID" datasource="LS_vendortrunks" textfield="v_DefaultURI"
+                                            valuefield="v_VendorTrunkID" refresh=true></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=BatchStartTime>Batch Start Time : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#"
+                           href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       data-ng-model="BatchStartTime = (BatchStartTime | date:'yyyy-MM-dd HH:mm:ss')">
+								<span class="input-group-addon" ng-click="BatchStartTime=''">
+						            <i class="glyphicon glyphicon-refresh"></i>
+						        </span>
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="BatchStartTime"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=BatchEndTime>Batch End Time : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#"
+                           href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       data-ng-model="BatchEndTime = (BatchEndTime | date:'yyyy-MM-dd HH:mm:ss')">
+								<span class="input-group-addon" ng-click="BatchEndTime=''">
+						            <i class="glyphicon glyphicon-refresh"></i>
+						        </span>
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="BatchEndTime"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="allText">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyID>Total records found : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        {{totalrows}}
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="allText">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=header>Is File contain headers ? </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="checkbox" ng-model="header"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="allText" ng-repeat="headerCol in headerCols">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4" style="text-align:right">
+                        <label title="Col">Col{{$index+1}} : </label>
+                    </div>
+                    <div class="col-sm-5">
+                        <button class="addfields" ng-show="$last" ng-click="addCol()">+</button>
+                        <dropdown-directive model="headerCol.colValue" datasource="{{headerColumns}}" textfield="text"
+                                            valuefield="indexValue"></dropdown-directive>
+                        <button class="removefields" ng-show="$last" ng-click="removeCol()">-</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title="UploadCSV">Upload CSV File : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="file" totalrows=totalrows fileread="allText"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row" ng-show="ReturnCode && ReturnCode > 0">
+                    <br/>
+
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-8">
+                        <label title="UploadCSV">Error While Uploading File : {{ReturnCode}} </label>
+                        <label title="UploadCSV">Please Try Again. </label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-primary" type="button" ng-if="allText" ng-click="UploadFileCSV();"> Upload
+                        File<span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"/>
+                </div>
+            </div>
+
+            <div class="row" ng-show="fileReadBoolean == true">
+
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:center">
+                        <h4>File is Uploading. Please wait...!</h4>
+
+                        <p>Total Records Uploaded : {{recordUploaded}}/{{totalrows-1}} </p>
+
+                        <img ng-show="fileProcess" src="/images/FileProcess.gif" alt="File Process Icon">
+                    </div>
+                </div>
+
+                <div class="row" ng-hide="fileProcess">
+                    <div class="col-sm-6"/>
+                    <div class="col-sm-6">
+                        <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#vendorCDRs">Import Vendor CDRs
+    </button>
+</div>

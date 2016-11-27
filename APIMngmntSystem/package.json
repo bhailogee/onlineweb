@@ -1,0 +1,26 @@
+{
+  "name": "apimngradvoss",
+  "private": true,
+  "main": "Server.js",
+  "version": "0.0.1",
+  "description": "AdvOSS API Manager",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^3.4.0",
+    "body-parser": "~1.9.0",
+    "cron": "^1.1.0",
+    "dot": "^1.0.3",
+    "express": "~4.10.1",
+    "extend": "^3.0.0",
+    "jquery-deferred": "^0.3.0",
+    "mysql": "^2.5.4",
+    "object-mapper": "^3.0.1",
+    "yyield": "^0.9.10"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "set NODE_ENV=development && node Server.js",
+    "startprod": "set NODE_ENV=production && node Server.js",	
+			"debug": "node-debug --debug-brk Server.js"
+  }
+}

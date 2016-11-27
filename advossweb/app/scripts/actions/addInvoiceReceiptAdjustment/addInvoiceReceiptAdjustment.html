@@ -1,0 +1,97 @@
+<div class="modal" style="display:{{displayPopUp}};" id="unAllocatedReceiptInovices" role="dialog">
+    <div class="modal-dialog" style="width:{{modalBodyWidth}}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp='none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" ng-show="displayPopUpReceipt">Unsettled Receipts</h2>
+
+                <h2 class="modal-title" ng-show="displayPopUpInvoices">Unsettled Invoices</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-1" style="text-align: center">
+                        <a ng-click="listUnallocatedReceipt(); ReceiptID=null;" ng-show="displayPopUpInvoices"
+                           style="text-decoration: underline; cursor:pointer; color: blue; text-align:left;">
+                            Back
+                        </a>
+                    </div>
+                    <div class="col-sm-6" style="text-align: center">
+                        Total Unsettled Amount = {{totalUnsettledAmount}}
+                    </div>
+
+                    <div class="col-sm-5" style="text-align: center">
+                        Remaining Unsettled Amount = {{remainingAmount}}
+                    </div>
+                </div>
+                <br/>
+
+                <div ng-show="displayPopUpInvoices">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div ng-if="listunallocatedinvoicereceiptpanel.gridOpts">
+                                <div ui-grid="listunallocatedinvoicereceiptpanel.gridOpts" ui-grid-selection
+                                     ui-grid-exporter class="grid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4" style="text-align:right;">
+
+                        </div>
+                        <div class="col-sm-2">
+                            Total Invoices <input type="text" ng-model="totalInvoices" style="width : 70%"
+                                                  disabled="true"/>
+                        </div>
+                        <div class="col-sm-2">
+                            Total Previous <input type="text" ng-model="totalPrevious" style="width : 70%"
+                                                  disabled="true"/>
+                        </div>
+                        <div class="col-sm-2">
+                            Total This Payment <input type="text" ng-model="totalThisPayment" style="width : 80%"
+                                                      disabled="true"/>
+                        </div>
+                        <div class="col-sm-2">
+                            Total Outstanding <input type="text" ng-model="totalOutstanding" style="width : 70%"
+                                                     disabled="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="displayPopUpReceipt">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div ng-if="listunallocatedreceiptpanel.gridOpts">
+                                <div ui-grid="listunallocatedreceiptpanel.gridOpts" ui-grid-selection ui-grid-exporter
+                                     class="grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="listUnallocatedInvoice();"
+                   ng-show="displayPopUpReceipt && ReceiptID">
+                    Select & Proceed to Inovices
+                </a>
+                <a class="btn btn-primary" type="button" ng-click="invoiceReceiptAdjustment(); displayPopUp='none';"
+                   data-dismiss="modal" ng-show="displayPopUpInvoices && totalThisPayment > 0">
+                    Adjust <span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp='none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-left:10px;">
+    <div class="ng-scope">
+        <button type="button" class="btn btn-primary" ng-click="listUnallocatedReceipt(); displayPopUp='';"
+                data-toggle="modal" data-target="#unAllocatedReceiptInovices">Adjust Invoice Receipt
+        </button>
+    </div>
+</div>

@@ -1,0 +1,197 @@
+.applabel {
+    color: #286090;
+    margin-left:10px;
+    width:100%;
+}
+
+.appvalue {
+    font-size: 12px;
+    margin-left: 30px;
+    font-weight: normal;
+    width:100%;
+}
+
+.fieldset {
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    background: #F5F5F5 none repeat scroll 0% 0%;
+    padding: 05px;
+    margin-bottom: 1em;
+}
+
+.legend {
+    text-align: left;
+    width: auto;
+    padding: 0.1em 0.2em;
+    background: #CCC none repeat scroll 0% 0%;
+    border: 0px solid rgb(14, 13, 13);
+    border-radius: 4px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: inherit;
+}
+
+.dummydash {
+   
+}
+
+
+.viewClass {
+    border: 10px solid rgb(14, 13, 13);
+}
+.headerline {
+    margin-top: 02px;
+    margin-bottom: 00px;
+    border-width: 1.5px 0px 0px;
+    border-style: solid none none;
+    border-color: #EEE -moz-use-text-color -moz-use-text-color;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+}
+
+
+.error-focus {
+    border: 1px red;
+    border-style: solid;
+}
+
+.error-label {
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.error-show {
+    background-color: red !important;
+}
+.error-int {
+    background-color: blue !important;
+}
+.error-dec {
+    background-color: yellow !important;
+}
+.error-bool {
+    background-color: brown !important;
+}
+
+
+input[readonly] { 
+    background: none; 
+    color: #333; 
+    border: 0px solid #666 
+}
+
+/*.wrapGridHeading .ui-grid-cell-contents,.ui-grid-header-cell {
+     height: 70px;
+     white-space: normal;
+     -ms-text-overflow: clip;
+     -o-text-overflow: clip;
+     text-overflow: clip;
+     display: inline-block;
+     overflow: visible;
+}*/
+
+.tabsClass-internal {    
+    cursor: pointer;
+}
+
+
+ul.toolbar {
+    position: relative;
+    overflow: hidden; /* required to CONTAINER 'floating li' in FF */
+    height: auto;
+    margin: 0;
+    padding: 2px;
+    width: 100%;
+    list-style: none;
+    text-align: left;
+    background: #D6D6D6 url(/images/80ade5_40x100_textures_04_highlight_hard_100.png) 0 50% repeat-x;
+    border-top: 1px solid #BBB;
+}
+
+ul.toolbar li {
+    font-size: 0.9em;
+    margin: 0;
+    padding: 2px 7px;
+    float: right;
+    color: #000;
+    border: 1px solid transparent;
+    border-right-color: #BBB;
+    cursor: pointer;
+}
+
+ul.toolbar li:hover {
+    color: #005;
+    background: #EEE url(/images/80ade5_40x100_textures_04_highlight_hard_100.png) 0 50% repeat-x;
+    border-top-color: #BBB;
+    border-bottom-color: #BBB;
+}
+
+ul.toolbar li.first:hover {
+    border-left-color: #BBB;
+}
+
+ul.toolbar li span {
+/* icons in toolbar */
+    width: 15px;
+    height: 15px;
+    margin-left: -3px;
+    margin-right: 0.75ex;
+    vertical-align: middle;
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+    display: block;
+    display: inline-block;
+}
+
+ul.toolbar li:hover span {
+    opacity: 1;
+    filter: alpha(opacity = 100);
+}
+
+.addfields{
+    background: #C76868;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 21px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 4px 9px;
+    vertical-align: top;
+    line-height: 100%;   
+}
+
+.removefields{
+    background: #C76868;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 21px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 4px 9px;
+    vertical-align: top;
+    line-height: 100%;      
+}
+
+.alternative_cls_even{
+    background:#E6E6E6;
+}
+.alternative_cls_odd{
+    background:#FFFFFF;
+}
+.ui-grid-viewport {
+  min-height: 200px;  
+}
+.ui-grid {
+    height:300px;
+}
+
+a {
+    cursor:pointer
+}

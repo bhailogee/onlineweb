@@ -1,0 +1,32 @@
+{
+	"active": [
+		"session",
+		"authorization",
+		"content",
+		"router",
+		"transaction",
+		"resourceManager",
+		"resourceManagerCommands",
+		"gateway"
+	],
+	"common": [ "eventservicebus" ],
+	"middlerwares": {
+		"eventservicebus": {
+		},
+		"content": {
+
+		},
+		"security": {
+
+		},
+		"transaction": {
+
+		},
+		"router": { },
+		"session": { },
+		"resourceManager": { },
+		"gateway": { },
+		"authorization": { },
+		"resourceManagerCommands": { }
+	}
+}

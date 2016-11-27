@@ -1,0 +1,45 @@
+.row {
+    padding: 2px;
+    margin-left:0px;
+}
+
+a{
+    background-color:transparent;
+    cursor: pointer;
+}
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.btn-primary{
+    color:#fff;
+    background-color:#2D396D;
+    border-color:#2D396D
+}
+.modal-dialog {
+    width: 880px;
+    margin: 30px auto;
+}
+/*.parentMenu {
+    color: black;
+    background-color: black;
+}
+
+
+.parentMenu > li ::after {
+    border-bottom:white 30px solid;
+}
+.childMenu {
+    background-color: white;
+    list-style-type: circle;
+}
+
+.childMenu li {
+    margin-left: -7px;
+    padding-left: 24px;
+    font-size: 13px;
+
+}*/
+

@@ -1,0 +1,144 @@
+﻿<style>
+    .SearchHeadingDiv {
+        width: 100%;
+        float: left;
+
+    }
+
+    .SearchBoxesDiv {
+        width: 100%;
+        float: left;
+
+    }
+
+    .SearchButtonsDiv {
+        width: 100%;
+        float: right;
+        text-align: right;
+    }
+
+    .SearchRow {
+        width: 50%;
+        float: left;
+    }
+
+    .SearchWideRow {
+        width: 100%;
+
+        float: left;
+    }
+
+    .SearchCol {
+        width: 100%;
+    }
+</style>
+<div class="SearchHeadingDiv">
+    <h1 class="SearchHeadingDiv">{{SchemaService.getHeading(viewObject)}}</h1>
+</div>
+<fieldset
+        style="border: 1px solid #CCC; border-radius: 4px; background: #F5F5F5 none repeat scroll 0% 0%; padding: 05px; margin-bottom: 1em; widht:100%;">
+    <div>
+        <div class="SearchHeadingDiv">
+            <h1 class="legend"></h1>
+        </div>
+
+        <!--
+        <dropdown-directive model="param.selectedValue" datasource="{{dropdownList}}" textfield="value" valuefield="value"></dropdown-directive>
+        <input type="text"value="" ng-model="SearchVal" />
+        <input type="button" ng-click="addSearchItem(param.selectedValue)" value="+" />
+        <table>
+            <tr ng-repeat="item in SearchItems">
+                <td><b>{{item.name}} : </b></td>
+                <td>{{item.val}}</td>
+                <td style="padding-left:20px;"><input type="button" value="-" ng-click="removeSearchItem($index)" /></td>
+            </tr>
+        </table>
+    -->
+
+        <div class="SearchBoxesDiv">
+            <!--<div ng-repeat="item in dropdownList" ng-if="item.name != 'Row Count' && item.name != 'Offset'" class="SearchRow" >
+                <div class="SearchCol"><b> {{item.name}} : </b></div>
+                <div class="SearchCol" ng-if="!item.name.endsWith('ID')">
+                    <input type="text" ng-model="searchFields[item.value]" value="" />
+                    <span ng-if="item.name=='Date Of Birth'">(DD/MM/YYYY)</span>
+                </div>
+                <div class="SearchCol" ng-if="item.name.endsWith('ID')">
+                    <dropdown-directive datasource="{{[{'ID': '1', 'Value':'One'},{'ID': '2', 'Value':'Two'}]}}" model="searchFields[item.value]"  />
+                </div>
+            </div>-->
+
+
+            <div ng-repeat="param in AllSearchFields" ng-class="{'SearchRow':param.ctype != 'datetime'}">
+                <div ng-if="(param.visible == undefined || param.visible) && param.direction=='in'" class="row">
+                    <div class="col-md-6" ng-if="param.ctype != 'datetime'">
+                        <label style="margin-left:30px;">{{Utility.getLabel(param)}}</label>
+                    </div>
+                    <div ng-class="{'col-md-6':param.ctype != 'datetime', 'SearchWideRow':param.ctype == 'datetime'}"
+                         ng-switch="param.ctype">
+                        <dropdown-directive ng-switch-when="select" model="param.value"
+                                            datasource="{{param.datasource}}" textfield="{{param.textfield || 'value'}}"
+                                            valuefield="{{param.valuefield || 'ID'}}" isnull=true
+                                            refresh=true></dropdown-directive>
+                        <textarea ng-switch-when="textarea" ng-model="param.value"
+                                  validator="{{param.validator || 'empty'}}"/>
+                        <!--<span ng-switch-when="textarea">{{param.validator || 'empty'}}</span>-->
+
+
+                        <div ng-switch-when="datetime" class="SearchWideRow">
+                            <!--<fieldset style="border: 1px solid black; widht:100%;">
+                            <legend>{{Utility.getLabel(param)}}</legend>-->
+                            <div class="SearchWideRow">
+                                <div class="col-md-3">
+                                    <label style="margin-left:30px;">{{Utility.getLabel(param)}} From</label>
+                                </div>
+
+                                <div class="col-md-3" style="margin-left: 08px; margin-top: 5px;">
+                                    <input type="text" ng-model="dateTimeFields[param.name+'FromDate']"/>
+                                </div>
+                            </div>
+                            <div class="SearchWideRow">
+                                <div class="col-md-3">
+                                    <label style="margin-left:30px;">{{Utility.getLabel(param)}} To
+                                    </label>
+                                </div>
+                                <div class="col-md-3" style="margin-left: 08px; margin-top: 5px;">
+                                    <input type="text" ng-model="dateTimeFields[param.name+'ToDate']"/>
+                                </div>
+                            </div>
+
+                            <div class="SearchWideRow" style="margin-left:30px; margin-top: 10px">
+                                <a class="btn btn-primary" type="button" ng-click="todayDate(param.name);">Today</a>
+                                <a class="btn btn-primary" type="button"
+                                   ng-click="yesterdayDate(param.name);">yesterday</a>
+                                <a class="btn btn-primary" type="button"
+                                   ng-click="thisWeekDate(param.name);">thisWeek</a>
+                                <a class="btn btn-primary" type="button"
+                                   ng-click="lastWeekDate(param.name);">lastWeek</a>
+                                <a class="btn btn-primary" type="button"
+                                   ng-click="thisMonthDate(param.name);">thisMonth</a>
+                                <a class="btn btn-primary" type="button"
+                                   ng-click="lastMonthDate(param.name);">lastMonth</a>
+                                <a class="btn btn-primary" type="button"
+                                   ng-click="thisYearDate(param.name);">thisYear</a>
+                                <a class="btn btn-primary" type="button"
+                                   ng-click="lastYearDate(param.name);">lastYear</a><br><br>
+                            </div>
+                        </div>
+                        <input ng-switch-when="textbox" type="textbox" ng-model="param.value"
+                               validator="{{param.validator || 'empty'}}"/>
+                        <!--<span ng-switch-when="textbox">{{param.validator || 'empty'}}</span>-->
+                        <input ng-switch-default type="{{$root.utility.getControlType(param.ctype)}}"
+                               ng-model="param.value"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="SearchButtonsDiv">
+            <input class="btn btn-primary" type="button" value="Search" ng-model="searchBtn"
+                   ng-click="fnSearchRecords();"/>
+
+        </div>
+    </div>
+</fieldset>
+
+<div ng-if="searchdone" dashboard="dashboard" sourcedata="nData" listpanel-directive view-object="viewObject"></div>

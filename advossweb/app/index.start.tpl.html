@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>    
+    <script src="bower_components/moment/moment.js"></script>    
+    <script src="bower_components/angular/angular.js"></script>    
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>    
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/promise/promise.js"></script>
+    <script src="bower_components/ng-lodash/build/ng-lodash.min.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />  
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>  
+    <link href="bower_components/ngtoast/dist/ngToast.min.css" rel="stylesheet" />
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/ngtoast/dist/ngToast.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="bower_components/pdfmake/build/pdfmake.min.js"></script>
+    <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>    
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.min.js"></script>
+    <link href="bower_components/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" />
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
+    <link href="bower_components/angular-cron-jobs/dist/angular-cron-jobs.css" rel="stylesheet" />
+    <script src="bower_components/angular-cron-jobs/dist/angular-cron-jobs.js"></script>
+
+    <script src="scripts/lib/spahql.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link href="bower_components/angular-ui-grid/ui-grid.min.css" rel="stylesheet" />
+
+    <link href="styles/app.css" rel="stylesheet" />
+    <link href="styles/appbootstrapchanges.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
+    <link href="styles/menu.css" rel="stylesheet" />
+
+    <script src="app.js"></script>
+    <!-- include: "type": "js", "files": "scripts/**/*.js" -->
+    
+</head>
+
+<body ng-controller="ApplicationController">
+    <toast></toast>
+    <span>{{State2}}</span>
+    <div class="container-fluid"  ui-view="mainView"></div>
+</body>
+</html>

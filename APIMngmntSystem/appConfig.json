@@ -1,0 +1,20 @@
+{
+	"port": 3335,
+	"isDebug": true,
+	"timeFormat": "dd/mm/yy hh:MM:ss:ffff",
+	"definedAPIs": [ "mysql" ],
+	"env": "dev",
+	"baseAPI": "mysql",
+	"schema": "schema2.json",
+	"apiManagerSchema": "applicationSchema.json",
+	"packageName": "productmetadata",
+	"esbSessionsTimer": 3000,
+	"hangedSessionsTimer": 3000,
+	"connection": {
+		"host": "192.168.0.111",
+		"port": 3306,
+		"user": "root",
+		"password": "root123",
+		"database": "productmetadata"
+	}
+}

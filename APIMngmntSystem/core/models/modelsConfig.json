@@ -1,0 +1,13 @@
+{
+	"models": {
+		"base": {
+			"lifetime": "transient",
+			"path": "./base/base.js"
+		},
+		"platform": {
+			"lifetime": "transient",
+			"path": "./platform/platform.js"
+		}
+	}
+
+}

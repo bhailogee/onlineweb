@@ -1,0 +1,178 @@
+<form name="Form">
+    <div class="fieldset">
+        <h1 class="legend"> Select Services To be Assigned </h1>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <label title=ChargesPerBillingCycle>Plan : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <dropdown-directive model="planID" datasource="LS_plans" textfield="v_PlanName" valuefield="v_PlanID"
+                                    isnull=true refresh=true></dropdown-directive>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <label title=CircutID>Circuit Name : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <input type="text" ng-model="CircutID"/>
+
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div ng-if="ifshow" class="row">
+
+            <form>
+
+                <div ng-if="Services" ng-repeat="service in Services">
+
+
+                    <div class="row  checkbox highlight">
+                        <div class="col-sm-2"></div>
+
+
+                        <div class="col-sm-4">
+                            <input type="checkbox"
+                                   ng-model="servicesList[service.v_ServiceName + service.v_ServiceID]['assign']"
+                                   value="Check"/><label title=Service>{{service.v_ServiceName}}</label>
+                        </div>
+
+                        <div class="col-sm-4">
+
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="servicesList[service.v_ServiceName + service.v_ServiceID]['assign']">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4">
+                            <label title=ServiceOfferingID>Service Offering : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <!--<dropdown-directive model="serviceGroup" datasource="LS_servicegroups" textfield="v_ServiceGroupName" valuefield="v_ServiceGroupID" isnull=true refresh=true />-->
+                            <dropdown-directive refresh=true
+                                                model="servicesList[service.v_ServiceName + service.v_ServiceID]['ServiceOfferingID']"
+                                                datasource="{{serviceOfferings[service.v_ServiceName + service.v_ServiceID]}}"
+                                                textfield="ServiceOferingName"
+                                                valuefield="ServiceOferingID"></dropdown-directive>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="servicesList[service.v_ServiceName + service.v_ServiceID]['assign']">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4">
+                            <label title=ChargesPerBillingCycle>Charges Per Billing Cycle : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <input type="text"
+                                   ng-model="servicesList[service.v_ServiceName + service.v_ServiceID]['ChargesPerBillingCycle']"
+                                   validator="required"/>
+
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="row"
+                         ng-show="servicesList[service.v_ServiceName + service.v_ServiceID]['ShowCLI'] &&servicesList[service.v_ServiceName + service.v_ServiceID]['assign']">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4">
+                            <label title=ChargesPerBillingCycle>Calling Number : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <input type="text"
+                                   ng-model="servicesList[service.v_ServiceName + service.v_ServiceID]['CLI']"
+                                   validator="required"/>
+
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="row"
+                         ng-show="servicesList[service.v_ServiceName + service.v_ServiceID]['ShowAccnoSGUserName'] && servicesList[service.v_ServiceName + service.v_ServiceID]['assign']">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4">
+                            <label title=ChargesPerBillingCycle>Identification UserName : </label>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <input type="hidden"
+                                   ng-model="servicesList[service.v_ServiceName + service.v_ServiceID]['ServiceGroupID']"
+                                   validator="required"/>
+                            <input type="text"
+                                   ng-model="servicesList[service.v_ServiceName + service.v_ServiceID]['AccnoSGUserName']"
+                                   validator="required"/>
+
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <!--<div class="row" ng-show="servicesList[service.v_ServiceName + service.v_ServiceID]['assign']">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=ChargesPerBillingCycleExpiry>Charges Per Billing Cycle Expiry : </label>
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" id="myDatepicker" ng-model="servicesList[service.v_ServiceName + service.v_ServiceID]['ChargesPerBillingCycleExpiry']" />
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>-->
+                    <!--<div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=ActivationChargesMultiplier>Activation Charges Multiplier : </label>
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" ng-model="servicesList[service.v_ServiceName + service.v_ServiceID]['ActivationChargesMultiplier']" />
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>-->
+                </div>
+            </form>
+
+            <!-- 	<div class="row">
+                    <div class="col-md-2"><br/><br/></div>
+                    <div class="col-md-4">
+                        <label title=ChargesPerBillingCycle>Process Service Offering On : </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="radio" ng-model="SubscriptionProcessTime" value="now" checked="checked">Process Now<br/>
+                        <!-- <input type="radio" ng-model="SubscriptionProcessTime" value="midnight">Today Mid Night<br/>
+                        <input type="radio" ng-model="SubscriptionProcessTime" value="firstuse">First Use<br/>
+				</div>
+                <div class="col-md-2"></div>
+			</div> -->
+
+            <!--<input type="button" value="test" ng-click="test()" />-->
+            <!--<div class="row"><div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=ApplicationClientID>Application Client : </label>
+                </div>
+
+                <div class="col-sm-4"><dropdown-directive refresh=true model="ApplicationClientID" datasource="LS_applicationclients" textfield="v_ApplicationClientName" valuefield="v_ApplicationClientID" ></dropdown-directive>
+                </div>
+            </div>
+
+            <div class="row"><div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=ServiceOfferingPriceTierID>Service Offering Price Tier : </label>
+                </div>
+
+                <div class="col-sm-4"><dropdown-directive refresh=true model="ServiceOfferingPriceTierID" datasource="LS_ServiceOfferingPriceTiers" textfield="v_ServiceOfferingPriceTierID" valuefield="v_ServiceOfferingPriceTierID" ></dropdown-directive>
+                </div>
+            </div>-->
+        </div>
+
+    </div>
+</form>

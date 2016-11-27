@@ -1,0 +1,170 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 ng-if="rawPolicyData" style="text-align:center">Please Remove Raw Policy Data to import Policy
+                Prefixes.</h4>
+
+            <div ng-if="listpanel.gridOpts">
+                <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                     class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="policyPrefix" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" style="text-align:center">Import Policy Prefixes</h2>
+            </div>
+
+            <div class="modal-body" ng-show="fileReadBoolean == false">
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyID>Policy : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        {{PolicyName}}
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-if="totalrows">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyID>Total records found : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        {{totalrows}}
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="allText">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=header>Is File contain headers ? </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="checkbox" ng-model="header"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="allText" ng-repeat="headerCol in headerCols">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4" style="text-align:right">
+                        <label title="Col">Col{{$index+1}} : </label>
+                    </div>
+                    <div class="col-sm-5">
+                        <button class="addfields" ng-show="$last" ng-click="addCol()">+</button>
+                        <dropdown-directive model="headerCol.colValue" datasource="{{headerColumns}}" textfield="text"
+                                            valuefield="indexValue"></dropdown-directive>
+                        <button class="removefields" ng-show="$last" ng-click="removeCol()">-</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title="UploadCSV">Upload CSV File : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="file" totalrows=totalrows fileread="allText"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-primary" type="button" ng-if="allText" ng-click="UploadFileCSV();">Upload
+                        File<span class="glyphicon glyphicon-ok"></span>
+
+                    </a>
+                    <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"/>
+                </div>
+            </div>
+
+            <div class="modal-body" ng-show="fileReadBoolean == true">
+
+                <div class="row" ng-show="fileProcess">
+                    <div class="col-sm-12" style="text-align:center">
+                        <h4>File is Uploading. Please wait...!</h4>
+
+                        <p>Total Records Uploaded : {{recordUploaded}}/{{totalrows-1}} </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div ng-if="listpanel.gridOpts">
+                            <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-edit ui-grid-selection
+                                 ui-grid-exporter class="grid"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="errorRows.lenght > 0">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title="errorRows">Some Error Found Here : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        {{errorRows}}
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-primary" type="button" ng-click="ImportFileCSV();"
+                       ng-hide="fileProcess">Import<span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <a class="btn btn-primary" type="button" ng-click="DropFileCSV();" ng-hide="fileProcess">Drop<span
+                            class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                           ng-hide="fileProcess"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#policyPrefix" ng-hide="rawPolicyData">Import Policy Prefixes
+    </button>
+
+    <button class="btn btn-primary" type="button" ng-click="DropFileCSV();" ng-show="rawPolicyData">Drop Raw Policy
+        Data
+    </button>
+</div>
+
+<div class="modal" style="display:{{updateDeletePopUp}};" id="updateDeletepolicyPrefix" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="updateDeletePopUp = 'none'; openRawPolicy=false"><span
+                        aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Update or Delete Policy Prefixe</h2>
+            </div>
+
+            <div ng-if="openRawPolicy" dashboard="dashboardScope" detailspanel-directive
+                 view-object="dashboardScope.viewObjects['UI_rawpolicydata.view1']"></div>
+
+        </div>
+    </div>
+</div>

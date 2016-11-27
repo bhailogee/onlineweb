@@ -1,0 +1,10 @@
+{
+	"remoteIP": "ip",
+	"connectionRemoteAddress": "connection.remoteAddress",
+	"socketRemoteAddress": "socket.remoteAddress",
+	"connectionSocketRemoteAddress": "connection.socket.remoteAddress",
+	"authToken": "cookies.authToken",
+	"portalID": "config.portalID",
+	"completePath": "parsedUrl.path",
+	"httpMethod": "method"
+}

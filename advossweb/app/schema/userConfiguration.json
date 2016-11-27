@@ -1,0 +1,9 @@
+{
+	"mask":{
+		"text" : "AAA",
+		"phone": "(999) 999-9999"
+	},
+	"ListView":{
+		"isResetDefault" : "true"
+	}
+}

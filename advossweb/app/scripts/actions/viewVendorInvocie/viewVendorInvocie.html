@@ -1,0 +1,187 @@
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+
+<div style="text-align: center">
+    <a ng-click="downloadPDF();" style="text-decoration: underline; cursor:pointer; color: blue; text-align:left;">
+        Print
+    </a>
+</div>
+
+<div class="fieldset ng-scope" style="margin-top:10px;" id="printArea">
+
+    <div style="float:left">
+        <img src="/images/logo1.png"/>
+    </div>
+
+    <div style="float:right;margin-right:100px">
+        <p>
+            {{AgentContact.v_CustomerName}} <br/>
+            {{AgentContact.v_Address}} <br/>
+            {{AgentContact.v_City}} ,{{AgentContact.v_Country}} <br/>
+            {{AgentContact.v_LandLine_Tel}} <br/>
+            {{AgentContact.v_Email}}
+        </p>
+    </div>
+
+    <div style="height:10px; width:100%; background-color:#FF9900; display:inline-block"/>
+
+    <div style="float:left;margin-left:20px">
+        <h1>Invoice</h1>
+        <strong>{{Customer.v_CustomerName}}</strong> <br/>
+        <strong>{{Customer.v_Address1}} {{Customer.v_Address2}}</strong> <br/>
+        <strong>{{Customer.v_City}}</strong> <br/>
+        <strong>{{Customer.v_Country}}</strong> <br/>
+        <strong>Attention: {{ABMFContact.v_CustomerName}}</strong> <br/>
+        <strong style="margin-left:70px">{{ABMFContact.v_Designation}}</strong> <br/>
+        <strong style="margin-left:70px">{{ABMFContact.v_LandLine_Tel}}</strong> <br/>
+    </div>
+
+    <div style="float:right;margin-right:20px">
+        <br/><br/>
+        <table>
+            <tr>
+                <td><strong>Invoice Date:</strong></td>
+                <td>{{InvoiceDate}}</td>
+            </tr>
+            <tr>
+                <td><strong>Invoice Due Date:</strong></td>
+                <td>{{InvoiceDueDate}}</td>
+            </tr>
+            <tr>
+                <td><strong>Payment Terms:</strong></td>
+                <td>{{PaymentTerms}}</td>
+            </tr>
+            <!-- <tr><td><strong>S/ Terms:</strong></td><td></td></tr> -->
+            <!-- <tr><td><strong>Delivery:</strong></td><td></td></tr> -->
+            <tr>
+                <td><strong>Currency:</strong></td>
+                <td>{{Agent.v_CurrencyName}}</td>
+            </tr>
+            <!-- <tr><td><strong>Prepaired By:</strong></td><td>{{AdminInfor.v_UserName}}</td></tr> -->
+            <!-- <tr><td></td><td>{{AdminInfor.v_Tel}}</td></tr> -->
+            <tr>
+                <td><strong>Invoice NO:</strong></td>
+                <td>{{Invoice.v_InvoiceReferenceNo}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="table" style="margin-left:5%;width:100%;display:inline-block">
+        <br/>
+        <table style="width:90%" border="1">
+            <tr>
+                <th>Item</th>
+                <th>Unit</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price / Annum</th>
+            </tr>
+            <tr ng-repeat="x in InvoiceData">
+                <td align="center">{{$index+1}}</td>
+                <td align="center">{{x.Unit}}</td>
+                <td align="center">{{x.Description}}</td>
+                <td align="center">1</td>
+                <td>
+                    <table style="width:90%" border="0">
+                        <tr>
+                            <td style="padding-left:5%">{{Agent.v_CurrencyName}}</td>
+                            <td align="right">{{x.Amount}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right"><strong>Vat 5%</strong></td>
+                <td>
+                    <table style="width:90%" border="0">
+                        <tr>
+                            <td style="padding-left:5%">{{Agent.v_CurrencyName}}</td>
+                            <td align="right">{{Invoice.v_TotalInvoicePaymentTaxes}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right"><strong>Total Amount Due</strong></td>
+                <td>
+                    <table style="width:90%" border="0">
+                        <tr>
+                            <td style="padding-left:5%">{{Agent.v_CurrencyName}}</td>
+                            <td align="right">{{Invoice.v_InvoiceDueAmount}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="float:left; display:inline-block; width:750px;margin-left:20px">
+        <br/>
+
+        <p><strong>Period Covered</strong>:<br/>
+            {{fromDate}} To {{toDate}}
+    </div>
+    <br/>
+
+    <div style="float:left; margin-left:70px; display:inline-block; width:750px">
+        <strong>Payment Due:</strong><br/>
+        Please ensure All Charges Payable To: <br/><br/>
+        Broadbased Communications Ltd <br/>
+        <table>
+            <tr>
+                <td><strong>Bank: </strong></td>
+                <td>{{Agent.v_BankName}}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Branch: </strong></td>
+                <td>{{Agent.v_BankBranch}}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Account No: </strong></td>
+                <td>{{Agent.v_BankAccountNumber}}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Account Name: </strong></td>
+                <td>{{Agent.v_BankAccountName}}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Sort-Code: </strong></td>
+                <td>{{Agent.v_BankSortCode}}</td>
+            </tr>
+            <tr>
+                <td><strong>Vat Reg No: </strong></td>
+                <td>{{Agent.v_BankVatRegNo}}</td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+
+    <!-- <div style="float:left; display:inline-block; width:750px">
+        <table width="750px">
+            <tr>
+                <td><hr></td>
+            </tr>
+
+            <tr>
+                <td><strong>Approved By </strong></td>
+                <td><strong>{{ApprovedBy}}</strong></td>
+                <td><strong>Date</strong></td>
+            </tr>
+            <tr>
+                <td />
+                <td>{{ApprovedByDesignation}}</td>
+                <td>{{currentDate}}</td>
+            </tr>
+        </table>
+    </div> -->
+    <div style="height:10px; width:100%; background-color:#FF9900; display:inline-block"/>
+    {{InvoiceVersion}}
+</div>
+</div>	

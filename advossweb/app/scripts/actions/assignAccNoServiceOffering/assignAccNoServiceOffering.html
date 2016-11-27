@@ -1,0 +1,138 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">AccNo Service Offering</h1>
+
+            <div ng-if="listaccnoserviceofferingpanel.gridOpts">
+
+                <!-- 				<div insertpanel-directive dashboard="dashboard" insert-proc-name="{{viewObject.insertPanel}}" showasmodal="true"></div>					         -->
+
+                <div ui-grid="listaccnoserviceofferingpanel.gridOpts" ui-grid-pagination ui-grid-selection
+                     ui-grid-exporter class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+    <br/><br/>
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#assignAccNoServiceOffering">Assign AccNo Service Offering
+    </button>
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="assignAccNoServiceOffering" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Assign AccNo Service Offering</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ServiceOfferingID>Service Offering : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="ServiceOfferingID" datasource="LS_serviceofferings"
+                                            textfield="v_ServiceOfferingName"
+                                            valuefield="v_ServiceOfferingID"></dropdown-directive>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=SubscriptionID>Subscription : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="SubscriptionID" datasource="LS_subscriptions"
+                                            textfield="v_SubscriptionType"
+                                            valuefield="v_SubscriptionID"></dropdown-directive>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ChargesPerBillingCycle>Charges Per Billing Cycle : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ChargesPerBillingCycle"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title="ChargesPerBillingCycleExpiry">Charges Per Billing Cycle Expiry : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+
+
+                        <a class="dropdown-toggle" id="{{ChargesPerBillingCycleExpiry+'_dropdown1'}}" role="button"
+                           data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       ng-model="ChargesPerBillingCycleExpiry = (ChargesPerBillingCycleExpiry | date:'yyyy-MM-dd HH:mm:ss')"/>
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                            </div>
+                        </a>
+                                    <span class="input-group-addon" ng-click="param.value=''">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                    </span>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="ChargesPerBillingCycleExpiry"
+                                            data-datetimepicker-config="{dropdownSelector: '#dropdown1' }"/>
+                        </ul>
+
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ActivationChargesMultiplier>Activation Charges Multiplier : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ActivationChargesMultiplier"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <!-- <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ApplicationClientID>Application Client : </label>
+                    </div>
+
+                    <div class="col-sm-4"><dropdown-directive model="ApplicationClientID" datasource="LS_applicationclients" textfield="v_ApplicationClientName" valuefield="v_ApplicationClientID" ></dropdown-directive>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fnassignAccNoServiceOffering();">Assign<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+

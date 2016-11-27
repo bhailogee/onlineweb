@@ -1,0 +1,22 @@
+﻿<div style="display:{{viewObject.display}}" ng-if="listpanel.gridOpts" style="margin-top:10px;">
+
+    <h1 class="heading">{{Utility.getHeading(viewObject)}}</h1>
+
+    <div>
+        <!--<div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter class="grid"></div>-->
+        <div ui-grid="listpanel.gridOpts" ui-grid-selection ui-grid-exporter ui-grid-pagination class="grid"></div>
+        <!--<div ui-grid="listpanel.gridOpts" class="grid"></div>-->
+    </div>
+
+    <div ng-if="viewObject.insertPanel" style="display:inline;">
+        <a href="#" data-toggle="modal"
+           data-target="#{{viewObject.apiName+'_'+viewObject.insertPanel+'_'+viewObject.viewName+'_insert'}}"
+           class="btn btn-primary" value="Add" ng-click="openInsertPanel=true;">Add</a>
+
+        <div ng-if="openInsertPanel"
+             id="{{viewObject.apiName+'_'+viewObject.insertPanel+'_'+viewObject.viewName+'_insert'}}">
+            <div insertpanel-directive dashboard="dashboard" insert-proc-name="{{viewObject.insertPanel}}"
+                 showasmodal="true"></div>
+        </div>
+    </div>
+</div>

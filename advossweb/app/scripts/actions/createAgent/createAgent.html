@@ -1,0 +1,436 @@
+<div class="modal" style="display:{{displayPopUp}};" id="createAgent" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Insert Trouble Ticket</h2>
+            </div>
+            <div class="modal-body">
+<div id="content">
+    <div id="wrapper">
+        <div id="navigation" style="display:none;">
+            <ul>
+                <li class="selected"><a href="#">General</a></li>
+                <li><a href="#">Contact Info</a></li>
+                <!--<li><a href="#">Authentication</a></li>-->
+                <li><a href="#">Switch Conf</a></li>
+                <li><a href="#">Confirm</a></li>
+            </ul>
+        </div>
+        <div id="steps">
+            <fieldset class="step">
+                <!--<legend>Account</legend>-->
+                <div>
+                    <label title=CustomerName>Full Name : </label>
+                    <input type="text" ng-model="CustomerName"/>
+                </div>
+                <div>
+                    <label title=CustomerName>Domain Name </label>
+                    <input type="text" ng-model="DomainName"/>
+                </div>
+                <div>
+                    <label title=CustomerName>Currency ID </label>
+                    <dropdown-directive model="CurrencyID" datasource="LS_currencies" textfield="v_CurrencyName"
+                                        valuefield="v_CurrencyID" isnull=true refresh=true/>
+                </div>
+                <div>
+                    <label title=CustomerName>Company Name </label>
+                    <input type="text" ng-model="CompanyName"/>
+                </div>
+                <div>
+                    <label title=CustomerName>Email</label>
+                    <input type="text" ng-model="Email"/>
+                </div>
+                <div>
+                    <label title=CustomerName>Title (Position) </label>
+                    <input type="text" ng-model="TitlePosition"/>
+                </div>
+                <div>
+                    <label title=Address>Address : </label>
+                    <input type="text" ng-model="Address"/>
+                </div>
+                <div>
+                    <label title=City>City : </label>
+                    <input type="text" ng-model="City"/>
+                </div>
+                <div>
+                    <label title=State>State : </label>
+                    <input type="text" ng-model="State"/>
+                </div>
+                <div>
+                    <label title=Country>Country : </label>
+                    <input type="text" ng-model="Country"/>
+                </div>
+                <div>
+                    <label title=Tel>Tel : </label>
+                    <input type="text" ng-model="Tel"/>
+                </div>
+                <div>
+                    <label title=MobileNumber>Mobile Number : </label>
+                    <input type="text" ng-model="MobileNumber"/>
+                </div>
+                <div>
+                    <label title=Fax>Fax : </label>
+                    <input type="text" ng-model="Fax"/>
+                </div>
+                <div>
+                    <label title=PostalCode>Postal Code : </label>
+                    <input type="text" ng-model="PostalCode"/>
+                </div>
+                <div>
+                    <label title=Company>Notes : </label>
+                    <input type="text" ng-model="Notes"/>
+                </div>
+                <div>
+                    <label title=Company>Bank Details : </label>
+                    <input type="text" ng-model="BamkDetails"/>
+                </div>
+                <div>
+                    <label title=Company>Language : </label>
+                    <input type="text" ng-model="Language"/>
+                </div>
+                <div>
+                    <a class="btn btn-primary btnNextTab">Next</a>
+                </div>
+            </fieldset>
+            <fieldset class="step">
+                <legend>Contact Information</legend>
+                <div>
+                    <h4>Billing</h4>
+                    <label title=CustomerName>Contact Person : </label>
+                    <input type="text" ng-model="billingContactPerson"/>
+                </div>
+                <div>
+                    <label title=Email>Email : </label>
+                    <input type="text" ng-model="billingEmail"/>
+                </div>
+                <div>
+                    <h4>Pricing</h4>
+                    <label title=CustomerName>Contact Person : </label>
+                    <input type="text" ng-model="pricingContactPerson"/>
+                </div>
+                <div>
+                    <label title=Email>Email : </label>
+                    <input type="text" ng-model="pricingEmail"/>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <label title=CustomerName>Contact Person : </label>
+                    <input type="text" ng-model="supportContactPerson"/>
+                </div>
+                <div>
+                    <label title=Email>Email : </label>
+                    <input type="text" ng-model="supportEmail"/>
+                </div>
+                <div>
+                    <h4>Commercial</h4>
+                    <label title=CustomerName>Contact Person : </label>
+                    <input type="text" ng-model="commercialContactPerson"/>
+                </div>
+                <div>
+                    <label title=Email>Email : </label>
+                    <input type="text" ng-model="commercialEmail"/>
+                </div>
+                <div>
+                    <label title=Email>Account Manager Email : </label>
+                    <input type="text" ng-model="AccountManagerEmail"/>
+                </div>
+                <div>
+                    <a class="btn btn-primary btnNextTab">Next</a>
+                </div>
+            </fieldset>
+            <!--<fieldset class="step">-->
+            <!--<legend>Authentication</legend>-->
+            <!--<div>-->
+            <!--<label title=Email>Email : </label>-->
+            <!--<input type="text" ng-model="Email" />-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<label title=Email>User Name : </label>-->
+            <!--<input type="text" ng-model="userName" />-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<label title=Email>Password : </label>-->
+            <!--<input name="password" required ng-model="password">-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<label title=Email>Retype Password : </label>-->
+            <!--<input name="confirm_password" ui-validate=" '$value==password' " ui-validate-watch=" 'password' ">-->
+            <!--</div>-->
+            <!--<div>Passwords match? {{!!confirm_password.$error.validator}}</div>-->
+            <!--<div>-->
+            <!--<a class="btn btn-primary btnNextTab">Next</a>-->
+            <!--</div>-->
+            <!--</fieldset>-->
+            <fieldset class="step">
+                <legend>switch Conf</legend>
+                <div>
+                    <ul style="list-style-type: none">
+                        <li ng-repeat="IP in IPs">
+                            <input type="text" ng-model="IP.number"/>
+                        </li>
+                        <li class="submit">
+                            <input type="submit" value="add" ng-click="addIP()">
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <a class="btn btn-primary btnNextTab">Next</a>
+                </div>
+            </fieldset>
+            <fieldset class="step">
+                <legend>Confirm</legend>
+                <div><span class="glyphicon glyphicon-ok"></span> <a class="btn btn-primary" type="button" ng-click="createAgent();">Create</a>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+            </div>
+
+            <div class="modal-footer">
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#createAgent">Create Agent
+    </button>
+
+</div>
+<style>
+    * {
+        margin: 0px auto;
+        padding: 0px;
+    }
+
+    #content {
+        margin: 15px auto;
+        text-align: center;
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    #wrapper {
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        border: 2px solid #fff;
+        background-color: #f9f9f9;
+        width: 700px;
+        height: auto;
+        overflow: hidden;
+    }
+
+    #steps {
+        width: 700px;
+        overflow: hidden;
+        height: auto;
+    }
+
+    .step {
+        float: left;
+        width: 700px;
+        height: auto;
+    }
+
+    #navigation {
+        height: 45px;
+        background-color: #e9e9e9;
+        border-top: 1px solid #fff;
+        -moz-border-radius: 0px 0px 05px 05px;
+        -webkit-border-bottom-left-radius: 05px;
+        -webkit-border-bottom-right-radius: 05px;
+        border-bottom-left-radius: 05px;
+        border-bottom-right-radius: 05px;
+    }
+
+    #navigation ul {
+        list-style: none;
+        float: left;
+        margin-left: 12px;
+    }
+
+    #navigation ul li {
+        float: left;
+        border-right: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        position: relative;
+        margin: 0px 2px;
+    }
+
+    #navigation ul li a {
+        display: block;
+        height: 45px;
+        background-color: #444;
+        color: #777;
+        outline: none;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 45px;
+        padding: 0px 20px;
+        border-right: 1px solid #fff;
+        border-left: 1px solid #fff;
+        background: #f0f0f0;
+        background: -webkit-gradient(linear, left bottom, left top, color-stop(0.09, rgb(240, 240, 240)), color-stop(0.55, rgb(227, 227, 227)), color-stop(0.78, rgb(240, 240, 240)));
+        background: -moz-linear-gradient(center bottom, rgb(240, 240, 240) 9%, rgb(227, 227, 227) 55%, rgb(240, 240, 240) 78%)
+    }
+
+    #navigation ul li a:hover,
+    #navigation ul li.selected a {
+        background: #d8d8d8;
+        color: #666;
+        text-shadow: 1px 1px 1px #fff;
+    }
+
+    span.checked {
+        background: transparent url(images/checked.png) no-repeat top left;
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        width: 20px;
+        height: 20px;
+    }
+
+    span.error {
+        background: transparent url(images/error.png) no-repeat top left;
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        width: 20px;
+        height: 20px;
+        border: 0px;
+        margin: 0px;
+    }
+
+    #steps fieldset {
+        border: none;
+        padding-bottom: 20px;
+        padding-top: 0px;
+    }
+
+    #steps legend {
+        text-align: left;
+        background-color: #f0f0f0;
+        color: #666;
+        font-size: 24px;
+        text-shadow: 1px 1px 1px #fff;
+        font-weight: bold;
+        float: left;
+        width: 700px;
+        padding: 5px 0px 5px 10px;
+        margin: 10px 0px;
+        border-bottom: 1px solid #fff;
+        border-top: 1px solid #d9d9d9;
+    }
+
+    #steps div {
+        float: left;
+        clear: both;
+        margin: 5px 0px;
+        background-color: #f4f4f4;
+        border: 1px solid #fff;
+        width: 400px;
+        padding: 10px;
+        margin-left: 100px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+    }
+
+    #steps div label {
+        width: 160px;
+        float: left;
+        text-align: right;
+        margin-right: 15px;
+        line-height: 26px;
+        color: #666;
+        text-shadow: 1px 1px 1px #fff;
+        font-weight: bold;
+    }
+
+    #steps input:not([type=radio]),
+    #steps textarea,
+    #steps select {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        outline: none;
+        padding: 5px;
+        width: 200px;
+        float: left;
+    }
+
+    #steps input:focus {
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+        background-color: #FFFEEF;
+    }
+
+    #steps div.submit {
+        background: none;
+        border: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    #steps button {
+        border: none;
+        outline: none;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        color: #ffffff;
+        display: block;
+        cursor: pointer;
+        margin: 0px auto;
+        clear: both;
+        padding: 7px 25px;
+        text-shadow: 0 1px 1px #777;
+        font-weight: bold;
+        font-family: "Century Gothic", Helvetica, sans-serif;
+        font-size: 22px;
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+        background: #4797ED;
+    }
+
+    #steps button:hover {
+        background: #d8d8d8;
+        color: #666;
+        text-shadow: 1px 1px 1px #fff;
+    }
+
+    .serviceOfferingPrice, .discountedCharges {
+        color: #008000;
+
+        text-align: center;
+    / / width : 100 %;
+    }
+
+    .requiredMark {
+        color: red;
+    }
+
+    .discountPrecent {
+        color: blue;
+    }
+</style>

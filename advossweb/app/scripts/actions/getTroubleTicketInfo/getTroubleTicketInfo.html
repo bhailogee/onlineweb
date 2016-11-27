@@ -1,0 +1,80 @@
+<h1>
+    Trouble Ticket Details
+</h1>
+<div class="fieldset">
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div title=Subject class="legend" style="font-size: 14px">
+                <label title="subject">
+                    Subject : {{Subject}}
+                </label>
+                <label style="float: right">
+                    Date: {{InsertTime | date:'medium'}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-6">
+            <label title=Subject>Trouble Ticket State :</label> {{TroubleTicketStateID}}
+        </div>
+
+        <div class="col-sm-6">
+            <label title=IssueTypeCategoryID>Issue Type Category :</label> {{IssueTypeCategoryID}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <label title=IssueTypeID>Issue Type :</label> {{IssueTypeID}}
+        </div>
+        <div class="col-sm-6">
+            <label title=IssueTypeID>Assign To Admin :</label> {{AssignedToAdministratorID}}
+        </div>
+    </div>
+</div>
+<div class="fieldset">
+    <h1 class="legend">Comments : </h1>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div ng-repeat="Description in Descriptions">
+                <div ng-if="Description.v_AdminID != 3 && Description.v_Description != null" class="fieldset"
+                     style="color:#2D396D; margin-left: 50px">
+                    <h1 class="legend" style="font-size: 14px">
+                        Admin Comment
+                        <div style="float: right">
+                            {{Description.v_InsertTime | date:'medium'}}
+                        </div>
+                    </h1>
+                    {{Description.v_Description}}
+                </div>
+                <div class="fieldset" ng-if="Description.v_AdminID != 3 && Description.v_InternalAdminNotes != null"
+                     ng-show="adminIDChk" style="margin-left: 100px">
+                    <div style="color:green">
+                        <h2 class="legend" style="font-size: 14px">
+                            Internal Notes
+                            <div style="float: right">
+                                {{Description.v_InsertTime | date:'medium'}}
+                            </div>
+                        </h2>
+                        {{Description.v_InternalAdminNotes}}
+                    </div>
+                </div>
+                <div ng-if="Description.v_AdminID == 3 && Description.v_Description != null" class="fieldset"
+                     style="color:#080CBF;">
+                    <h1 class="legend " style="font-size: 14px">
+                        User Comment
+                        <div style="float: right">
+                            {{Description.v_InsertTime | date:'medium'}}
+                        </div>
+                    </h1>
+                    {{Description.v_Description}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,117 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">Rates Day of Week</h1>
+
+            <div ng-if="listdayofweekpanel.gridOpts">
+                <div ui-grid="listdayofweekpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                     class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#insertDOW">Insert Day Of Week
+    </button>
+
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="insertDOW" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="displayPopUp = 'none'; displayUpdatePopUp = false;" type="button"
+                        ng-class="{'close':showasmodal}" aria-label="Close" class="ng-scope close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span></button>
+                <h2 class="modal-title" style="text-align: center;"> Day Of Week</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=PolicyRatingZoneID>Policy Rating Class : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        {{RatingClassName}}
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row">
+
+                    <h4 style="text-align: center;"> Day of Week </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                            <div class="col-sm-3">
+                                <h5 style="text-align: center;">From Day</h5>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <h5 style="text-align: center;">To Day</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                        </div>
+                        <div class="row" ng-show="displayUpdatePopUp == true">
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                            <div class="col-sm-3" style="text-align: center;">
+                                {{StartDayOfTheWeek}}
+                            </div>
+                            <div class="col-sm-3" style="text-align: center;">
+                                {{EndDayOfTheWeek}}
+                            </div>
+                            <div class="col-sm-4" style="text-align: center;">
+                                {{RatePerBlock}}
+                            </div>
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true"/>
+                        </div>
+                        <div class="row" ng-repeat="dow in dows">
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true">
+                                <button class="addfields" ng-show="$last" ng-click="addDOW()">+</button>
+                            </div>
+                            <div class="col-sm-3">
+                                <dropdown-directive model="dow.startDay" datasource="{{dayEnum}}" textfield="DayName"
+                                                    valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-3">
+                                <dropdown-directive model="dow.endDay" datasource="{{dayEnum}}" textfield="DayName"
+                                                    valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="dow.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1" ng-hide="displayUpdatePopUp == true">
+                                <button class="removefields" ng-show="$last" ng-click="removeDOW()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-hide="displayUpdatePopUp == true" ng-click="dayOfWeek();">Insert<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <a class="btn btn-primary" type="button" ng-show="displayUpdatePopUp == true"
+                   ng-click="updateRatesDOW();">Update<span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input validation-reset="Form" value="Close" class="btn ng-scope" type="button"
+                       ng-click=" displayPopUp = 'none'; displayUpdatePopUp = false;" aria-label="Close"
+                       data-dismiss="modal">
+            </div>
+        </div>
+    </div>
+</div>

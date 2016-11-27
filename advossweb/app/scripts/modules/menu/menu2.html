@@ -1,0 +1,35 @@
+<span ng-hide="menuItems">Loading...</span>
+
+<div class="menu menuwrapper" ng-show="menuItems">
+    <div class="treeview">
+        <nav>
+            <div class="homemenu">
+                <a ui-sref="basicdashboard">HOME
+                </a>
+            </div>
+            <ul>
+                <li ng-click="menuClicked($index,'parent')" ng-repeat="items in menuItems">
+                    <input type="checkbox" id="item-0"/>
+                    <label for="item-0">{{items.title}}
+                    </label>
+                    <ul ng-if="items.child.length>0">
+                        <li ng-click="menuClicked($index,'child',$event)" ng-repeat="c in items.child">
+                            <a ui-sref="{{(c.title==undefined || c.title=='') ? null : c.state}}">
+                                <input type="checkbox" id="item-0-0"/>
+                                <label for="item-0-0">{{c.title}}
+                                </label>
+                            </a>
+                            <ul ng-if="c.child.length>0">
+                                <li ng-click="menuClicked($index,'child',$event)" ng-repeat="cc in c.child">
+                                    <span class="glyphicon glyphicon-file"></span>
+                                    <a style="color:#000000;" ui-sref="{{cc.state}}"> {{cc.title}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!--ng-class="{'active' : ($index==selectedIndex[0] && 'child'==selectedIndex[1])}"-->

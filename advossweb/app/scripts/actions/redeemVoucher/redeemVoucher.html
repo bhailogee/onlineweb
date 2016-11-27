@@ -1,0 +1,36 @@
+<div style="margin-top:20px;" class="fieldset ng-scope">
+    <h1 class="legend ng-binding">Redeem Voucher</h1>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <label title=ABMFID>ABMF : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="ABMFID"/>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <label title=PIN>PIN : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="PIN"/>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6"/>
+        <div class="col-sm-6">
+            <a class="btn btn-primary" type="button" ng-click="redeemVoucher();" data-dismiss="modal">Redeem
+                Voucher<span class="glyphicon glyphicon-ok"></span></a>
+        </div>
+    </div>
+
+</div>

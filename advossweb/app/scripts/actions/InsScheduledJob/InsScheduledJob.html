@@ -1,0 +1,73 @@
+<div class="modal" style="display:{{displayPopUp}};" id="insScheduledJobDirective" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp2 = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Cron</h2>
+                <span id="message"></span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Scheduled Job Name : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ScheduledJobName"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Expression : </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <cron-selection output="myOutput"></cron-selection>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Output : </label>
+                    </div>
+                    <div class="col-sm-4">
+
+                        {{myOutput}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Scheduled Job Description : </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ScheduledJobDescription"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="SaveBatch();">Create<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp2 = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <h1 class="legend"></h1>
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#insScheduledJobDirective">Create Job
+    </button>
+
+</div>

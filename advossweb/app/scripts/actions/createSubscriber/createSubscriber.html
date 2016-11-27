@@ -1,0 +1,591 @@
+<div id="content">
+    <div id="wrapper">
+        <div id="navigation" style="display:none;">
+            <ul>
+                <li class="selected"><a href="#">Account</a></li>
+                <li><a href="#">Personal Details</a></li>
+                <li><a href="#">Service Offering</a></li>
+                <li><a href="#">Payment</a></li>
+                <li><a href="#">Confirm</a></li>
+            </ul>
+        </div>
+
+        <div id="steps">
+            <fieldset class="step">
+                <legend>Account</legend>
+                <div>
+                    <label title=AccnoUserName>User Name : </label>
+                    <input type="text" ng-model="UserName"/>
+                </div>
+                <div>
+                    <label title=Password>Password : </label>
+                    <input type="text" ng-model="Password"/>
+                </div>
+            </fieldset>
+
+            <fieldset class="step">
+                <legend>Personal Details</legend>
+                <div>
+                    <label title=CustomerName>Customer Name : </label>
+                    <input type="text" ng-model="CustomerName"/>
+                </div>
+                <div>
+                    <label title=Email>Email : </label>
+                    <input type="text" ng-model="Email"/>
+                </div>
+                <div>
+                    <label title=Address>Address : </label>
+                    <input type="text" ng-model="Address"/>
+                </div>
+                <div>
+                    <label title=City>City : </label>
+                    <input type="text" ng-model="City"/>
+                </div>
+                <div>
+                    <label title=State>State : </label>
+                    <input type="text" ng-model="State"/>
+                </div>
+                <div>
+                    <label title=Country>Country : </label>
+                    <input type="text" ng-model="Country"/>
+                </div>
+                <div>
+                    <label title=Tel>Tel : </label>
+                    <input type="text" ng-model="Tel"/>
+                </div>
+                <div>
+                    <label title=MobileNumber>Mobile Number : </label>
+                    <input type="text" ng-model="MobileNumber"/>
+                </div>
+                <div>
+                    <label title=Fax>Fax : </label>
+                    <input type="text" ng-model="Fax"/>
+                </div>
+                <div>
+                    <label title=PostalCode>Postal Code : </label>
+                    <input type="text" ng-model="PostalCode"/>
+                </div>
+                <div>
+                    <label title=Company>Company : </label>
+                    <input type="text" ng-model="Company"/>
+                </div>
+            </fieldset>
+
+            <fieldset class="step">
+                <legend>Service Offering</legend>
+                <div>
+                    <label title=Plan>Plan : </label>
+                    <dropdown-directive model="PlanID" datasource="LS_plans" textfield="v_PlanName"
+                                        valuefield="v_PlanID" refresh=true refresh=true></dropdown-directive>
+                </div>
+                <div>
+                    <label title=CircuitName>Circuit Name : </label>
+                    <input type="text" ng-model="CircuitName"/>
+                </div>
+
+                <div ng-show="smsServices.length > 0">
+                    <input type="checkbox" ng-model="SMS"/>SMS
+                </div>
+                <div ng-show="SMS">
+                    <label title=SMS>SMS Service Offering : </label>
+                    <dropdown-directive model="smsServiceOfferingID" datasource="{{smsServices}}"
+                                        textfield="v_ServiceOfferingName" valuefield="v_ServiceOfferingID"
+                                        onddchange="smsServicesFunction" isnull=true refresh=true></dropdown-directive>
+                </div>
+                <div ng-show="SMS">
+                    <label title=smsChargesPBC>SMS Charges PBC : </label>
+                    <input type="text" ng-model="smsChargesPBC"/>
+                </div>
+
+                <div ng-show="voipServices.length > 0">
+                    <input type="checkbox" ng-model="VoIP"/>Residential VoIP
+                </div>
+                <div ng-if="VoIP">
+                    <label title=VoIP>VoIP Service Offering : </label>
+                    <dropdown-directive model="voipServiceOfferingID" datasource="{{voipServices}}"
+                                        textfield="v_ServiceOfferingName" valuefield="v_ServiceOfferingID"
+                                        onddchange="voipServicesFunction" isnull=true refresh=true></dropdown-directive>
+                </div>
+                <div ng-if="VoIP">
+                    <label title=voipChargesPBC>VoIP Charges PBC : </label>
+                    <input type="text" ng-model="voipChargesPBC"/>
+                </div>
+                <div ng-if="VoIP">
+                    <label title=CallingNumber>VoIP Calling Number : </label>
+                    <input type="text" ng-model="CallingNumber"/>
+                </div>
+
+                <div ng-show="dataServices.length > 0">
+                    <input type="checkbox" ng-model="Data" value="Check"/>Internet Access
+                </div>
+                <div ng-if="Data">
+                    <label title=Data>Data Service Offering : </label>
+                    <dropdown-directive model="dataServiceOfferingID" datasource="{{dataServices}}"
+                                        textfield="v_ServiceOfferingName" valuefield="v_ServiceOfferingID"
+                                        onddchange="dataServicesFunction" isnull=true refresh=true></dropdown-directive>
+                </div>
+                <div ng-if="Data">
+                    <label title=dataChargesPBC>Data Charges PBC: </label>
+                    <input type="text" ng-model="dataChargesPBC"/>
+                </div>
+                <div ng-if="Data">
+                    <label title=IdentificationUserName>Data User Name: </label>
+                    <input type="text" ng-model="IdentificationUserName"/>
+                </div>
+            </fieldset>
+
+            <fieldset class="step">
+                <legend>Payment</legend>
+                <div>
+                    <label title=Amount>Amount : </label>
+                    <input type="text" ng-model="Amount"/>
+                </div>
+                <div>
+                    <label title=InstrumentNumber>Instrument Number : </label>
+                    <input type="text" ng-model="InstrumentNumber"/>
+                </div>
+                <div>
+                    <label title=PaymentMode>Payment Mode : </label>
+                    <dropdown-directive model="PaymentModeID" datasource="LS_paymentmodes" textfield="v_PaymentModeName"
+                                        valuefield="v_PaymentModeID" isnull=true refresh=true></dropdown-directive>
+                </div>
+                <div>
+                    <label title=InstrumentNumber>Remarks : </label>
+                    <textarea ng-model="Remarks"/>
+                </div>
+            </fieldset>
+
+            <fieldset class="step">
+                <legend>Confirm</legend>
+                <div>
+                    Everything in the form was correctly filled
+                    if all the steps have a green check mark icon.
+                    A red check mark icon indicates that some field
+                    is missing or filled out with invalid data. In this
+                    last step the user can confirm the submission of
+                    the form.
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Register" ng-click="registerSubscriber()">
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    * {
+        margin: 0px auto;
+        padding: 0px;
+    }
+
+    #content {
+        margin: 15px auto;
+        text-align: center;
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    #wrapper {
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        border: 2px solid #fff;
+        background-color: #f9f9f9;
+        width: 700px;
+        height: auto;
+        overflow: hidden;
+    }
+
+    #steps {
+        width: 700px;
+        overflow: hidden;
+        height: auto;
+    }
+
+    .step {
+        float: left;
+        width: 700px;
+        height: auto;
+    }
+
+    #navigation {
+        height: 45px;
+        background-color: #e9e9e9;
+        border-top: 1px solid #fff;
+        -moz-border-radius: 0px 0px 05px 05px;
+        -webkit-border-bottom-left-radius: 05px;
+        -webkit-border-bottom-right-radius: 05px;
+        border-bottom-left-radius: 05px;
+        border-bottom-right-radius: 05px;
+    }
+
+    #navigation ul {
+        list-style: none;
+        float: left;
+        margin-left: 12px;
+    }
+
+    #navigation ul li {
+        float: left;
+        border-right: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        position: relative;
+        margin: 0px 2px;
+    }
+
+    #navigation ul li a {
+        display: block;
+        height: 45px;
+        background-color: #444;
+        color: #777;
+        outline: none;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 45px;
+        padding: 0px 20px;
+        border-right: 1px solid #fff;
+        border-left: 1px solid #fff;
+        background: #f0f0f0;
+        background: -webkit-gradient(linear, left bottom, left top, color-stop(0.09, rgb(240, 240, 240)), color-stop(0.55, rgb(227, 227, 227)), color-stop(0.78, rgb(240, 240, 240)));
+        background: -moz-linear-gradient(center bottom, rgb(240, 240, 240) 9%, rgb(227, 227, 227) 55%, rgb(240, 240, 240) 78%)
+    }
+
+    #navigation ul li a:hover,
+    #navigation ul li.selected a {
+        background: #d8d8d8;
+        color: #666;
+        text-shadow: 1px 1px 1px #fff;
+    }
+
+    span.checked {
+        background: transparent url(images/checked.png) no-repeat top left;
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        width: 20px;
+        height: 20px;
+    }
+
+    span.error {
+        background: transparent url(images/error.png) no-repeat top left;
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        width: 20px;
+        height: 20px;
+        border: 0px;
+        margin: 0px;
+    }
+
+    #steps fieldset {
+        border: none;
+        padding-bottom: 20px;
+        padding-top: 0px;
+    }
+
+    #steps legend {
+        text-align: left;
+        background-color: #f0f0f0;
+        color: #666;
+        font-size: 24px;
+        text-shadow: 1px 1px 1px #fff;
+        font-weight: bold;
+        float: left;
+        width: 700px;
+        padding: 5px 0px 5px 10px;
+        margin: 10px 0px;
+        border-bottom: 1px solid #fff;
+        border-top: 1px solid #d9d9d9;
+    }
+
+    #steps div {
+        float: left;
+        clear: both;
+        margin: 5px 0px;
+        background-color: #f4f4f4;
+        border: 1px solid #fff;
+        width: 400px;
+        padding: 10px;
+        margin-left: 100px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+    }
+
+    #steps div label {
+        width: 160px;
+        float: left;
+        text-align: right;
+        margin-right: 15px;
+        line-height: 26px;
+        color: #666;
+        text-shadow: 1px 1px 1px #fff;
+        font-weight: bold;
+    }
+
+    #steps input:not([type=radio]),
+    #steps textarea,
+    #steps select {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        outline: none;
+        padding: 5px;
+        width: 200px;
+        float: left;
+    }
+
+    #steps input:focus {
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+        background-color: #FFFEEF;
+    }
+
+    #steps div.submit {
+        background: none;
+        border: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    #steps button {
+        border: none;
+        outline: none;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        color: #ffffff;
+        display: block;
+        cursor: pointer;
+        margin: 0px auto;
+        clear: both;
+        padding: 7px 25px;
+        text-shadow: 0 1px 1px #777;
+        font-weight: bold;
+        font-family: "Century Gothic", Helvetica, sans-serif;
+        font-size: 22px;
+        -moz-box-shadow: 0px 0px 3px #aaa;
+        -webkit-box-shadow: 0px 0px 3px #aaa;
+        box-shadow: 0px 0px 3px #aaa;
+        background: #4797ED;
+    }
+
+    #steps button:hover {
+        background: #d8d8d8;
+        color: #666;
+        text-shadow: 1px 1px 1px #fff;
+    }
+
+    .serviceOfferingPrice, .discountedCharges {
+        color: #008000;
+
+        text-align: center;
+    / / width : 100 %;
+    }
+
+    .requiredMark {
+        color: red;
+    }
+
+    .discountPrecent {
+        color: blue;
+    }
+
+</style>
+
+<script>
+    $(function () {
+        /*
+         number of fieldsets
+         */
+        var fieldsetCount = $('#formElem').children().length;
+
+        /*
+         current position of fieldset / navigation link
+         */
+        var current = 1;
+
+        /*
+         sum and save the widths of each one of the fieldsets
+         set the final sum as the total width of the steps element
+         */
+        var stepsWidth = 0;
+        var widths = new Array();
+        $('#steps .step').each(function (i) {
+            var $step = $(this);
+            widths[i] = stepsWidth;
+            stepsWidth += $step.width();
+        });
+        $('#steps').width(stepsWidth);
+
+        /*
+         to avoid problems in IE, focus the first input of the form
+         */
+        $('#formElem').children(':first').find(':input:first').focus();
+
+        /*
+         show the navigation bar
+         */
+        $('#navigation').show();
+
+        /*
+         when clicking on a navigation link
+         the form slides to the corresponding fieldset
+         */
+        $('#navigation a').bind('click', function (e) {
+            var $this = $(this);
+            var prev = current;
+            $this.closest('ul').find('li').removeClass('selected');
+            $this.parent().addClass('selected');
+            /*
+             we store the position of the link
+             in the current variable
+             */
+            current = $this.parent().index() + 1;
+            /*
+             animate / slide to the next or to the corresponding
+             fieldset. The order of the links in the navigation
+             is the order of the fieldsets.
+             Also, after sliding, we trigger the focus on the first
+             input element of the new fieldset
+             If we clicked on the last link (confirmation), then we validate
+             all the fieldsets, otherwise we validate the previous one
+             before the form slided
+             */
+            $('#steps').stop().animate({
+                marginLeft: '-' + widths[current - 1] + 'px'
+            }, 500, function () {
+                if (current == fieldsetCount)
+                    validateSteps();
+                else
+                    validateStep(prev);
+                $('#formElem').children(':nth-child(' + parseInt(current) + ')').find(':input:first').focus();
+            });
+            e.preventDefault();
+        });
+        $('.btnNextTab').bind('click', function (e) {
+
+            var prev = current;
+            $this.closest('ul').find('li').removeClass('selected');
+            $this.parent().addClass('selected');
+
+
+            current = current + 1;
+            /*
+             animate / slide to the next or to the corresponding
+             fieldset. The order of the links in the navigation
+             is the order of the fieldsets.
+             Also, after sliding, we trigger the focus on the first
+             input element of the new fieldset
+             If we clicked on the last link (confirmation), then we validate
+             all the fieldsets, otherwise we validate the previous one
+             before the form slided
+             */
+            $('#steps').stop().animate({
+                marginLeft: '-' + widths[current - 1] + 'px'
+            }, 500, function () {
+                if (current == fieldsetCount)
+                    validateSteps();
+                else
+                    validateStep(prev);
+                $('#formElem').children(':nth-child(' + parseInt(current) + ')').find(':input:first').focus();
+            });
+            e.preventDefault();
+        });
+
+        /*
+         clicking on the tab (on the last input of each fieldset), makes the form
+         slide to the next step
+         */
+        $('#formElem > fieldset').each(function () {
+            var $fieldset = $(this);
+            $fieldset.children(':last').find(':input').keydown(function (e) {
+                if (e.which == 9) {
+                    $('#navigation li:nth-child(' + (parseInt(current) + 1) + ') a').click();
+                    /* force the blur for validation */
+                    $(this).blur();
+                    e.preventDefault();
+                }
+            });
+        });
+
+        /*
+         validates errors on all the fieldsets
+         records if the Form has errors in $('#formElem').data()
+         */
+        function validateSteps() {
+            var FormErrors = false;
+            for (var i = 1; i < fieldsetCount; ++i) {
+                var error = validateStep(i);
+                if (error == -1)
+                    FormErrors = true;
+            }
+            $('#formElem').data('errors', FormErrors);
+        }
+
+        /*
+         validates one fieldset
+         and returns -1 if errors found, or 1 if not
+         */
+        function validateStep(step) {
+
+            if (step == fieldsetCount) return;
+
+            var error = 1;
+            var hasError = false;
+            $('#formElem').children(':nth-child(' + parseInt(step) + ')').find(':input:not(button)').each(function () {
+                var $this = $(this);
+                var valueLength = jQuery.trim($this.val()).length;
+
+                if (valueLength == '' && $this.hasClass("requird")) {
+                    hasError = true;
+                    $this.css('background-color', '#FFEDEF');
+                }
+                else
+                    $this.css('background-color', '#FFFFFF');
+            });
+            var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
+            $link.parent().find('.error,.checked').remove();
+
+            var valclass = 'checked';
+            if (hasError) {
+                error = -1;
+                valclass = 'error';
+            }
+            $('<span class="' + valclass + '"></span>').insertAfter($link);
+
+            return error;
+        }
+
+        /*
+         if there are errors don't allow the user to submit
+         */
+        $('#registerButton').bind('click', function () {
+            if ($('#formElem').data('errors')) {
+                alert('Please correct the errors in the Form');
+                return false;
+            }
+
+            //alert("Charges   " + parseFloat($("#totalAmountTopay").val())+"Balance  :  "+parseFloat($("#amount").val()));
+
+            if (parseFloat($("#totalAmountTopay").val()) > parseFloat($("#amount").val())) {
+                alert('You have less balance');
+                return false;
+            }
+
+        });
+    });
+</script>

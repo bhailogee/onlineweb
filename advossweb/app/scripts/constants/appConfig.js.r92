@@ -1,0 +1,19 @@
+﻿(function (angular) {
+
+    angular.module('app')
+        .constant('appConfig', {
+            'defaultAPI': "/server/dataservice",
+            'schema': "schema/ClientSchema.json",
+            'viewsSwitch': "schema/viewswitch.json",
+            'packageName': 'productmetadata',
+            'dashboards': 'schema/Dashboard.json',
+            'staticNames': ["ID", "SG", "ABMF", "NW", "IP", "XSD", "XML", "URI", "FQDN", "AAA", "SBC", "AS", "IVR", "URI", "PIN", "CPE", "CDR", "DID", "ID", "RTP", "NAT"],
+            'errorcodes': 'schema/errorcodes.json',
+            'portalID': 1,
+            'userConfig': 'schema/userConfiguration.json',
+            'toastSwitch': {'warning': true, 'danger': true, 'info': true, 'success': true},
+            'toastTime': {'warning': 5000, 'danger': 5000, 'info': 5000, 'success': 5000},
+            'imagesPath': "images",
+            'debug': true
+        });
+})(window.angular);

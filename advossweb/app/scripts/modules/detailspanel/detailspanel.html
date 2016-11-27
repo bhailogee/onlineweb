@@ -1,0 +1,70 @@
+<div ng-repeat="item in data" class="fieldset">
+
+    <h1 class="legend">{{Utility.getHeading(viewObject)}}</h1>
+
+    <div ng-repeat="param in item.Params"
+         ng-if="(param.visible == undefined || param.visible) && param.direction=='out'"
+         ng-class-even="'alternative_cls_even'" ng-class-odd="'alternative_cls_odd'">
+        <div style="margin: 0 0 5px 0;" class="row">
+            <div class="col-sm-3">
+                <label class="applabel">{{Utility.getLabel(param)}}: </label>
+            </div>
+            <div class="col-sm-8" ng-switch="param.ctype">
+                <!--<label class="appvalue">{{Utility.getValue(param)}}</label>-->
+                <a ng-switch-when="anchor"
+                   my-href=\"index.html#/tblunitreservations?v_SessionID={{grid.getCellValue(row, col)}}\"
+                >{{param.readOnlyValue}}</a>
+                <div google-directive params="param" ng-switch-when="percentguage"></div>
+                <input ng-switch-default ui-mask="{{Utility.getMask(param)}}" class="appvalue"
+                       ng-model="param.readOnlyValue" readonly></input>
+
+            </div>
+
+
+            <hr style="margin-top: 02px; margin-bottom: 02px; border: 0; border-top: 1px solid #eee;"/>
+        </div>
+
+        <!--<input ui-mask="{{Utility.getMask(param)}}" class="appvalue" ng-model="param.value" readonly></input>-->
+    </div>
+
+    <div ng-if="viewObject.updatePanel" style="display: inline;">
+        <a data-toggle="modal"
+           data-target="#{{viewObject.apiName+'_'+viewObject.updatePanel+'_'+viewObject.viewName+'_update'}}"
+           class="btn btn-primary" value="Update" ng-click="openEditPanel=true;">Update</a>
+
+        <div ng-if="openEditPanel"
+             id="{{viewObject.apiName+'_'+viewObject.updatePanel+'_'+viewObject.viewName+'_update'}}">
+            <div editpanel-directive dashboard="dashboard" update-proc-name="{{viewObject.updatePanel}}"
+                 showasmodal="true" params="params"></div>
+        </div>
+    </div>
+
+
+    <div ng-if="viewObject.insertPanel" style="display: inline;">
+        <a data-toggle="modal"
+           data-target="#{{viewObject.apiName+'_'+viewObject.insertPanel+'_'+viewObject.viewName+'_insert'}}"
+           class="btn btn-primary" value="Add" ng-click="openInsertPanel=true;">Add</a>
+
+        <div ng-if="openInsertPanel"
+             id="{{viewObject.apiName+'_'+viewObject.insertPanel+'_'+viewObject.viewName+'_insert'}}">
+            <div insertpanel-directive dashboard="dashboard" insert-proc-name="{{viewObject.insertPanel}}"
+                 showasmodal="true"></div>
+        </div>
+    </div>
+
+    <div ng-if="viewObject.deletePanel" style="display: inline;">
+        <a data-toggle="modal"
+           data-target="#{{viewObject.apiName+'_'+viewObject.deletePanel+'_'+viewObject.viewName+'_delete'}}"
+           class="btn btn-danger" value="Delete" ng-click="openDeletePanel=true;">Delete</a>
+
+        <div ng-if="openDeletePanel"
+             id="{{viewObject.apiName+'_'+viewObject.deletePanel+'_'+viewObject.viewName+'_delete'}}">
+            <div deletepanel-directive dashboard="dashboard" delete-proc-name="{{viewObject.deletePanel}}"
+                 showasmodal="true" params="params"></div>
+        </div>
+    </div>
+
+
+</div>
+
+

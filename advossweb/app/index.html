@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>    
+    <script src="bower_components/moment/moment.js"></script>    
+    <script src="bower_components/angular/angular.js"></script>    
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>    
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/promise/promise.js"></script>
+    <script src="bower_components/ng-lodash/build/ng-lodash.min.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />  
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>  
+    <link href="bower_components/ngtoast/dist/ngToast.min.css" rel="stylesheet" />
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/ngtoast/dist/ngToast.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="bower_components/pdfmake/build/pdfmake.min.js"></script>
+    <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>    
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.min.js"></script>
+    <link href="bower_components/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" />
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
+    <link href="bower_components/angular-cron-jobs/dist/angular-cron-jobs.css" rel="stylesheet" />
+    <script src="bower_components/angular-cron-jobs/dist/angular-cron-jobs.js"></script>
+
+    <script src="scripts/lib/spahql.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link href="bower_components/angular-ui-grid/ui-grid.min.css" rel="stylesheet" />
+
+    <link href="styles/app.css" rel="stylesheet" />
+    <link href="styles/appbootstrapchanges.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
+    <link href="styles/menu.css" rel="stylesheet" />
+
+    <script src="app.js"></script>
+    <script src="scripts/actions/InsScheduledJob/InsScheduledJob.js"></script>
+    <script src="scripts/actions/addDealerToDealerTransfer/addDealerToDealerTransfer.js"></script>
+    <script src="scripts/actions/addInvoiceReceiptAdjustment/addInvoiceReceiptAdjustment.js"></script>
+    <script src="scripts/actions/addPolicyPrefix/addPolicyPrefix.js"></script>
+    <script src="scripts/actions/addPolicyRatingZonePrefixes/addPolicyRatingZonePrefixes.js"></script>
+    <script src="scripts/actions/addPrepaidCardSeries/addPrepaidCardSeries.js"></script>
+    <script src="scripts/actions/addVendorCDRs/addVendorCDRs.js"></script>
+    <script src="scripts/actions/assignAccNoCounterOffering/assignAccNoCounterOffering.js"></script>
+    <script src="scripts/actions/assignAccNoServiceOffering/assignAccNoServiceOffering.js"></script>
+    <script src="scripts/actions/blkCancelPPCardSeriesByRange/blkCancelPPCardSeriesByRange.js"></script>
+    <script src="scripts/actions/blkCancelSeries/blkCancelSeries.js"></script>
+    <script src="scripts/actions/blkSellPPCardSeriesByRange/blkSellPPCardSeriesByRange.js"></script>
+    <script src="scripts/actions/blkSellSeries/blkSellSeries.js"></script>
+    <script src="scripts/actions/bulkOperation/bulkOperation.js"></script>
+    <script src="scripts/actions/changeSubscriberState/changeSubscriberState.js"></script>
+    <script src="scripts/actions/checkPINIfRedeemable/checkPINIfRedeemable.js"></script>
+    <script src="scripts/actions/createAgent/createAgent.js"></script>
+    <script src="scripts/actions/createSubscriber/confirm/confirmSubscrberRegistration.js"></script>
+    <script src="scripts/actions/createSubscriber/createSubscriber.js"></script>
+    <script src="scripts/actions/createSubscriber/payment/receipt.js"></script>
+    <script src="scripts/actions/createSubscriber/personalDetails/updateAccNoContactInfo.js"></script>
+    <script src="scripts/actions/createSubscriber/serviceIdentification/serviceIdentification.js"></script>
+    <script src="scripts/actions/createSubscriber/serviceOffering/assignServiceOffering.js"></script>
+    <script src="scripts/actions/dayOfWeek/dayOfWeek.js"></script>
+    <script src="scripts/actions/dayOfWeekTimeOfDay/dayOfWeekTimeOfDay.js"></script>
+    <script src="scripts/actions/deductNonUsageCharges/deductNonUsageCharges.js"></script>
+    <script src="scripts/actions/enrichCDRs/enrichCDRs.js"></script>
+    <script src="scripts/actions/fileUpload/fileUpload.js"></script>
+    <script src="scripts/actions/getTroubleTicketInfo/getTroubleTicketInfo.js"></script>
+    <script src="scripts/actions/headerBanner/headerBanner.js"></script>
+    <script src="scripts/actions/insTroubleTicketAssignment/insTroubleTicketAssignment.js"></script>
+    <script src="scripts/actions/insertPolicy/insertPolicy.js"></script>
+    <script src="scripts/actions/insertPolicyRatingClass/insertPolicyRatingClass.js"></script>
+    <script src="scripts/actions/insertPolicyRatingZone/insertPolicyRatingZone.js"></script>
+    <script src="scripts/actions/insertTroubleTicket/insertTroubleTicket.js"></script>
+    <script src="scripts/actions/insertVendorPolicy/insertVendorPolicy.js"></script>
+    <script src="scripts/actions/masterPrefixes/masterPrefixes.js"></script>
+    <script src="scripts/actions/policyPrefix/policyPrefix.js"></script>
+    <script src="scripts/actions/populateABMFInvoiceByDates/populateABMFInvoiceByDates.js"></script>
+    <script src="scripts/actions/progressiveBased/progressiveBased.js"></script>
+    <script src="scripts/actions/redeemVoucher/redeemVoucher.js"></script>
+    <script src="scripts/actions/redeemVoucherBySelfCare/redeemVoucherBySelfCare.js"></script>
+    <script src="scripts/actions/redoVendorRating/redoVendorRating.js"></script>
+    <script src="scripts/actions/revokeGUIMenuFromRole/revokeGUIMenuFromRole.js"></script>
+    <script src="scripts/actions/revokeRoleFromAdmin/revokeRoleFromAdmin.js"></script>
+    <script src="scripts/actions/rollBack/rollBack.js"></script>
+    <script src="scripts/actions/sendEmail/sendEmail.js"></script>
+    <script src="scripts/actions/sendSMS/sendSMS.js"></script>
+    <script src="scripts/actions/slotBased/slotBased.js"></script>
+    <script src="scripts/actions/switchPrefixe/switchPrefixe.js"></script>
+    <script src="scripts/actions/timeOfDay/timeOfDay.js"></script>
+    <script src="scripts/actions/updateTroubleTicketState/updateTroubleTicketState.js"></script>
+    <script src="scripts/actions/viewInvocie/viewInvocie.js"></script>
+    <script src="scripts/actions/viewVendorInvocie/viewVendorInvocie.js"></script>
+    <script src="scripts/actions/voucherDetail/voucherDetail.js"></script>
+    <script src="scripts/constants/APIConstants.js"></script>
+    <script src="scripts/constants/appConfig.js"></script>
+    <script src="scripts/controllers/ApplicationController.js"></script>
+    <script src="scripts/functions/customFunctions.js"></script>
+    <script src="scripts/lib/pathtoregexp.js"></script>
+    <script src="scripts/lib/spahql.js"></script>
+    <script src="scripts/modules/authentication/failedAuthentication/failedauth.js"></script>
+    <script src="scripts/modules/authentication/login/login.js"></script>
+    <script src="scripts/modules/authentication/logout/logout.js"></script>
+    <script src="scripts/modules/dashboard/dashboard.js"></script>
+    <script src="scripts/modules/deletepanel/deletepanel.js"></script>
+    <script src="scripts/modules/detailspanel/detailspanel.js"></script>
+    <script src="scripts/modules/editpanel/editpanel.js"></script>
+    <script src="scripts/modules/filters/customFilters.js"></script>
+    <script src="scripts/modules/googleuicontrols/GuageDirective.js"></script>
+    <script src="scripts/modules/helpingmodules/autocomplete/autocomplete.js"></script>
+    <script src="scripts/modules/helpingmodules/dropdown/dropdown.js"></script>
+    <script src="scripts/modules/helpingmodules/routinganchor/routinganchor.js"></script>
+    <script src="scripts/modules/helpingmodules/validator/myValidator.js"></script>
+    <script src="scripts/modules/insertpanel/insertpanel.js"></script>
+    <script src="scripts/modules/listpanel/listpanel.js"></script>
+    <script src="scripts/modules/main/main.js"></script>
+    <script src="scripts/modules/menu/menu.js"></script>
+    <script src="scripts/modules/notifications/notifyToast.js"></script>
+    <script src="scripts/modules/searchpanel/searchpanel.js"></script>
+    <script src="scripts/services/ApplicationService.js"></script>
+    <script src="scripts/services/AuthenticationService.js"></script>
+    <script src="scripts/services/CreateSubscriberService.js"></script>
+    <script src="scripts/services/CronJobService.js"></script>
+    <script src="scripts/services/DataService.js"></script>
+    <script src="scripts/services/DependentService.js"></script>
+    <script src="scripts/services/GoogleService.js"></script>
+    <script src="scripts/services/MaskingService.js"></script>
+    <script src="scripts/services/ModelHolderService.js"></script>
+    <script src="scripts/services/PathToRegExp.js"></script>
+    <script src="scripts/services/RolesService.js"></script>
+    <script src="scripts/services/RuntimeStates.js"></script>
+    <script src="scripts/services/SchemaService.js"></script>
+    <script src="scripts/services/SessionService.js"></script>
+    <script src="scripts/services/SpahFactory.js"></script>
+    <script src="scripts/services/StorageFactory.js"></script>
+    <script src="scripts/services/UserConfigurationService.js"></script>
+    <script src="scripts/services/UtilityService.js"></script>
+    <script src="scripts/services/ValidationRules.js"></script>
+    <script src="scripts/services/emailService.js"></script>
+    
+</head>
+
+<body ng-controller="ApplicationController">
+    <toast></toast>
+    <span>{{State2}}</span>
+    <div class="container-fluid"  ui-view="mainView"></div>
+</body>
+</html>

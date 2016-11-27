@@ -1,0 +1,56 @@
+       <form name="Form_{{seedProc}}">
+    <div ng-class="{modal : showasmodal}" tabindex="-1" role="dialog">
+        <div ng-class="{'modal-dialog':showasmodal}">
+            <div ng-class="{'modal-content':showasmodal}">
+                <div ng-class="{'modal-header':showasmodal}">
+                    <button ng-if="showasmodal" ng-click="updatePrevious();" type="button" ng-class="{'close':showasmodal}" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 ng-class="{'modal-title':showasmodal}">{{paneltemplate.Title}} {{Utility.getHeading(viewObject)}}</h2>
+                </div>
+
+                <div ng-class="{'modal-body':showasmodal}">
+             
+                    <div ng-repeat="param in data.Params">
+                        <div ng-if="(param.visible == undefined || param.visible) && param.direction=='in'" class="row">
+                            <div class="col-md-6">
+                                <label style="margin-left:30px;">{{Utility.getLabel(param)}}</label>
+                            </div>
+                            <div class="col-md-6" ng-switch="param.ctype">
+                                <dropdown-directive multiple="{{param.multiple}}" name="{{param.name}}"  ng-switch-when="select" dependson="{{param.dependson}}" dependentparam="{{param.dependentparam}}" isnull="param.isnull" model="param.value" datasource="{{param.datasource}}" textfield="{{param.textfield || 'value'}}" valuefield="{{param.valuefield || 'ID'}}"></dropdown-directive>
+                                <textarea ng-switch-when="textarea" ng-model="param.value" validator="{{param.validator || 'empty'}}" />
+                                <!--<span ng-switch-when="textarea">{{param.validator || 'empty'}}</span>-->
+
+                                <div ng-switch-when="datetime" class="dropdown">
+                                    <a class="dropdown-toggle" id="{{param.name+'_dropdown1'}}" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="param.value = (param.value | date:'yyyy-MM-dd HH:mm:ss')" />
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>                                                
+                                            </span>
+                                        </div>
+                                    </a>
+                                    <span class="input-group-addon" ng-click="param.value=''">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                    </span>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="param.value" data-datetimepicker-config="{startView:'day', minView:'day', dropdownSelector: '{{'#'+param.name+'_dropdown1'}}' }" />
+                                    </ul>
+                                </div>
+                                <input ng-switch-when="textbox" autocomplete-directive="param.autocomplete" type="textbox" ng-model="param.value" validator="{{param.validator || 'empty'}}"/>
+                                <!--<span ng-switch-when="textbox">{{param.validator || 'empty'}}</span>-->
+                                <input ng-switch-default type="{{$root.utility.getControlType(param.ctype)}}" ng-model="param.value" />
+                            </div>
+                        </div>
+                    </div>
+                        
+
+                </div>
+
+                <div ng-class="{'modal-footer':showasmodal}">
+                    <a class="btn btn-primary" validation-submit="Form_{{seedProc}}" ng-click="submitChanges('Form_'+seedProc);" type="button">{{paneltemplate.Button}}<span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <input ng-if="showasmodal" validation-reset="Form_{{seedProc}}" value="Close" class="btn" id="{{seedProc}}_modalClose" type="button" data-dismiss="modal" ng-click="updatePrevious();" aria-label="Close" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

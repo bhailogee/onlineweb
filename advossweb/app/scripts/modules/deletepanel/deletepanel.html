@@ -1,0 +1,25 @@
+﻿<div ng-class="{modal : showasmodal}" tabindex="-1" role="dialog">
+    <div ng-class="{'modal-dialog':showasmodal}">
+        <div ng-class="{'modal-content':showasmodal}">
+            <div ng-class="{'modal-header':showasmodal}">
+                <button ng-if="showasmodal" ng-click="discardChange()" type="button" ng-class="{'close':showasmodal}"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 ng-class="{'modal-title':showasmodal}">Are you sure you want to delete?</h2>
+            </div>
+
+            <div ng-class="{'modal-body':showasmodal}">
+
+                <span>Are you sure you want to delete?</span>
+
+            </div>
+
+            <div ng-class="{'modal-footer':showasmodal}">
+                <a class="btn btn-primary" data-dismiss="modal" ng-click="delete()" type="button">Confirm<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input ng-if="showasmodal" value="Close" class="btn" type="button" data-dismiss="modal"
+                       aria-label="Cancel"/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,893 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">Policy Rating Classes</h1>
+
+            <div ng-if="listpanelpolicyratingclasses.gridOpts">
+                <div ui-grid="listpanelpolicyratingclasses.gridOpts" ui-grid-pagination ui-grid-selection
+                     ui-grid-exporter class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#insertPolicyRatingClass">Insert Policy Rating Class
+    </button>
+
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="insertPolicyRatingClass" role="dialog">
+    <div class="modal-dialog" style="width:850px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="displayPopUp = 'none';" type="button" ng-class="{'close':showasmodal}"
+                        aria-label="Close" class="ng-scope close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                </button>
+                <h2 class="modal-title">Insert Policy Rating Class</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=PolicyRatingZoneID>Policy Rating Zone : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        {{ZoneName}}
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=RatingClassName>Rating Class Name : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="RatingClassName"/>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="RatingClass">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=RatingClassID>Rating Class : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <dropdown-directive model="RatingClassID" datasource="LS_ratingclasses"
+                                            textfield="v_RatingClassName"
+                                            valuefield="v_RatingClassID"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="DurationBasedCharging == 1">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=DurationRateTypeID>Duration Rate Type : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <dropdown-directive model="DurationRateTypeID" datasource="{{chargingBases}}"
+                                            textfield="chargingBasesName"
+                                            valuefield="chargingBasesValue"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="DurationRateTypeID == 1">
+                    <h4 style="text-align: center;"> Flat </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=RatePerDurationBlock>RatePer Duration Block : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="RatePerDurationBlock"/>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="DurationRateTypeID == 2">
+
+                    <h4 style="text-align: center;"> Time Of day </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">From Time</h5>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">To Time</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="durationTOD in durationTODs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addDurationTOD()">+</button>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 2%;">
+                                <dropdown-directive model="durationTOD.startTime" datasource="{{startTime}}"
+                                                    textfield="startTimeName"
+                                                    valuefield="startTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 3%;">
+                                <dropdown-directive model="durationTOD.endTime" datasource="{{endTime}}"
+                                                    textfield="endTimeName"
+                                                    valuefield="endTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 7%;">
+                                <input type="text" style="width:130px;" ng-model="durationTOD.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeDurationTOD()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="DurationRateTypeID == 3">
+
+                    <h4 style="text-align: center;"> Day of Week </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">From Day</h5>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">To Day</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="durationDOW in durationDOWs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addDurationDOW()">+</button>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 1%;">
+                                <dropdown-directive model="durationDOW.startDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 2%;">
+                                <dropdown-directive model="durationDOW.endDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 7%;">
+                                <input type="text" style="width:130px;" ng-model="durationDOW.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeDurationDOW()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="DurationRateTypeID == 4">
+
+                    <h4 style="text-align: center;"> Day of Week & Time of day </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: left;">From Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">From Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: left;">To Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">To Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="durationDOWTOD in durationDOWTODs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addDurationDOWTOD()">+</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="durationDOWTOD.startTime" datasource="{{startTime}}"
+                                                    textfield="startTimeName"
+                                                    valuefield="startTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="durationDOWTOD.startDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="durationDOWTOD.endTime" datasource="{{endTime}}"
+                                                    textfield="endTimeName"
+                                                    valuefield="endTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="durationDOWTOD.endDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" style="width:70px;" ng-model="durationDOWTOD.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeDurationDOWTOD()">-
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="DurationRateTypeID == 5">
+                    <h4 style="text-align: center;"> Progressive </h4>
+
+                    <div class="row">
+                        <div class="col-sm-1"/>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-2"/>
+                                <div class="col-sm-4">
+                                    <h5>Rate PerSlot</h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5>Slot Duration</h5>
+                                </div>
+                                <div class="col-sm-2"/>
+                            </div>
+
+                            <div class="row" ng-repeat="durationRatePerSlot in durationRatePerSlots">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4">
+                                    <input type="text" ng-model="durationRatePerSlot.ratePerslot"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" ng-model="durationRatePerSlot.slotDuration"/>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1"/>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="DurationRateTypeID == 6">
+
+                    <h4 style="text-align: center;"> Slot Based </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-2"/>
+                            <div class="col-sm-4">
+                                <h5>Slot Quantity</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h5>Rate Per Block</h5>
+                            </div>
+
+                            <div class="col-sm-2"/>
+                        </div>
+                        <div class="row" ng-repeat="durationSlot in durationSlots">
+                            <div class="col-sm-2">
+                                <button class="addfields" ng-show="$last" ng-click="addDurationSlot()">+</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" style="width:130px;" ng-model="durationSlot.slotQuantity"/>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" style="width:130px;" ng-model="durationSlot.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="removefields" ng-show="$last" ng-click="removeDurationSlot()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="UsageBasedCharging == 1">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=UsageRateTypeID>Usage Rate Type : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <dropdown-directive model="UsageRateTypeID" datasource="{{chargingBases}}"
+                                            textfield="chargingBasesName"
+                                            valuefield="chargingBasesValue"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="UsageRateTypeID == 1">
+                    <h4 style="text-align: center;"> Flat </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=RatePerBlock>Rate Per Block</label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="RatePerBlock"/>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="UsageRateTypeID == 2">
+
+                    <h4 style="text-align: center;"> Time Of day </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">From Time</h5>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">To Time</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="usageTOD in usageTODs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addUsageTOD()">+</button>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 2%;">
+                                <dropdown-directive model="usageTOD.startTime" datasource="{{startTime}}"
+                                                    textfield="startTimeName"
+                                                    valuefield="startTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 3%;">
+                                <dropdown-directive model="usageTOD.endTime" datasource="{{endTime}}"
+                                                    textfield="endTimeName"
+                                                    valuefield="endTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 7%;">
+                                <input type="text" style="width:130px;" ng-model="usageTOD.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeUsageTOD()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="UsageRateTypeID == 3">
+
+                    <h4 style="text-align: center;"> Day of Week </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">From Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">To Day</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="usageDOW in usageDOWs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addUsageDOW()">+</button>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 1%;">
+                                <dropdown-directive model="usageDOW.startDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 2%;">
+                                <dropdown-directive model="usageDOW.endDay" datasource="{{dayEnum}}" textfield="DayName"
+                                                    valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 7%;">
+                                <input type="text" style="width:130px;" ng-model="usageDOW.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeUsageDOW()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="UsageRateTypeID == 4">
+
+                    <h4 style="text-align: center;"> Day of Week & Time of day </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: left;">From Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">From Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: left;">To Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">To Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="usageDOWTOD in usageDOWTODs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addUsageDOWTOD()">+</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="usageDOWTOD.startTime" datasource="{{startTime}}"
+                                                    textfield="startTimeName"
+                                                    valuefield="startTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="usageDOWTOD.startDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="usageDOWTOD.endTime" datasource="{{endTime}}"
+                                                    textfield="endTimeName"
+                                                    valuefield="endTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="usageDOWTOD.endDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" style="width:70px;" ng-model="usageDOWTOD.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeUsageDOWTOD()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="UsageRateTypeID == 5">
+
+                    <h4 style="text-align: center;"> Progressive </h4>
+
+                    <div class="row">
+                        <div class="col-sm-1"/>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-1"/>
+                                <div class="col-sm-5">
+                                    <h5>Rate PerSlot</h5>
+                                </div>
+                                <div class="col-sm-5">
+                                    <h5>Slot Duration</h5>
+                                </div>
+                                <div class="col-sm-1"/>
+                            </div>
+
+                            <div class="row" ng-repeat="usageRatePerSlot in usageRatePerSlots">
+
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4">
+                                    <input type="text" ng-model="usageRatePerSlot.ratePerslot"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" ng-model="usageRatePerSlot.slotDuration"/>
+                                </div>
+                                <div class="col-sm-2"></div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-1"/>
+                    </div>
+                </div>
+                <div class="row" ng-show="UsageRateTypeID == 6">
+
+                    <h4 style="text-align: center;"> Slot Based </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-2"/>
+                            <div class="col-sm-4">
+                                <h5>Slot Quantity</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h5>Rate Per Block</h5>
+                            </div>
+
+                            <div class="col-sm-2"/>
+                        </div>
+                        <div class="row" ng-repeat="usageSlot in usageSlots">
+                            <div class="col-sm-2">
+                                <button class="addfields" ng-show="$last" ng-click="addUsageSlot()">+</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" style="width:130px;" ng-model="usageSlot.slotQuantity"/>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" style="width:130px;" ng-model="usageSlot.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="removefields" ng-show="$last" ng-click="removeUsageSlot()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="EventBasedCharging == 1">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=EventRateTypeID>Event Rate Type : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <dropdown-directive model="EventRateTypeID" datasource="{{chargingBases}}"
+                                            textfield="chargingBasesName"
+                                            valuefield="chargingBasesValue"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="EventRateTypeID == 1">
+                    <h4 style="text-align: center;"> Flat </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=RatePerEvent>Rate Per Event : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="RatePerEvent"/>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="EventRateTypeID == 2">
+
+                    <h4 style="text-align: center;"> Time Of day </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">From Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">To Time</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="eventTOD in eventTODs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addEventTOD()">+</button>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 2%;">
+                                <dropdown-directive model="eventTOD.startTime" datasource="{{startTime}}"
+                                                    textfield="startTimeName"
+                                                    valuefield="startTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 3%;">
+                                <dropdown-directive model="eventTOD.endTime" datasource="{{endTime}}"
+                                                    textfield="endTimeName"
+                                                    valuefield="endTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 7%;">
+                                <input type="text" style="width:130px;" ng-model="eventTOD.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeEventTOD()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="EventRateTypeID == 3">
+
+                    <h4 style="text-align: center;"> Day of Week </h4>
+
+                    <div class="row">
+                        <div class="col-sm-1"/>
+                        <div class="col-sm-5">
+                            <label title=EventDOWRatePerBlock>Rate Per Block</label>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="ratePerBlock"/>
+                        </div>
+                        <div class="col-sm-1"/>
+                    </div>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">From Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">To Day</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="eventDOW in eventDOWs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addEventDOW()">+</button>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 1%;">
+                                <dropdown-directive model="eventDOW.startDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 2%;">
+                                <dropdown-directive model="eventDOW.endDay" datasource="{{dayEnum}}" textfield="DayName"
+                                                    valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 7%;">
+                                <input type="text" style="width:130px;" ng-model="eventDOW.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeEventDOW()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="EventRateTypeID == 4">
+
+                    <h4 style="text-align: center;"> Day of Week & Time of day</h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-1"/>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: left;">From Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">From Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: left;">To Time</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="white-space: nowrap; text-align: center;">To Day</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 style="text-align: center;">Rate Per Block</h5>
+                            </div>
+                            <div class="col-sm-1"/>
+                        </div>
+                        <div class="row" ng-repeat="eventDOWTOD in eventDOWTODs">
+                            <div class="col-sm-1">
+                                <button class="addfields" ng-show="$last" ng-click="addEventDOWTOD()">+</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="eventDOWTOD.startTime" datasource="{{startTime}}"
+                                                    textfield="startTimeName"
+                                                    valuefield="startTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="eventDOWTOD.startDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="eventDOWTOD.endTime" datasource="{{endTime}}"
+                                                    textfield="endTimeName"
+                                                    valuefield="endTimeValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <dropdown-directive model="eventDOWTOD.endDay" datasource="{{dayEnum}}"
+                                                    textfield="DayName" valuefield="DayValue"></dropdown-directive>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" style="width:70px;" ng-model="eventDOWTOD.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="removefields" ng-show="$last" ng-click="removeEventDOWTOD()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row" ng-show="EventRateTypeID == 5">
+
+                    <h4 style="text-align: center;"> Progressive </h4>
+
+                    <div class="row">
+                        <div class="col-sm-1"/>
+                        <div class="col-sm-10">
+
+                            <div class="row">
+                                <div class="col-sm-1"/>
+                                <div class="col-sm-5">
+                                    <h5>Rate PerSlot</h5>
+                                </div>
+                                <div class="col-sm-5">
+                                    <h5>Slot Duration</h5>
+                                </div>
+                                <div class="col-sm-1"/>
+                            </div>
+
+                            <div class="row" ng-repeat="eventRatePerSlot in eventRatePerSlots">
+
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4">
+                                    <input type="text" ng-model="eventRatePerSlot.ratePerslot"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" ng-model="eventRatePerSlot.slotDuration"/>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1"/>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="EventRateTypeID == 6">
+
+                    <h4 style="text-align: center;"> Slot Based </h4>
+
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-2"/>
+                            <div class="col-sm-4">
+                                <h5>Slot Quantity</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h5>Rate Per Block</h5>
+                            </div>
+
+                            <div class="col-sm-2"/>
+                        </div>
+                        <div class="row" ng-repeat="eventSlot in eventSlots">
+                            <div class="col-sm-2">
+                                <button class="addfields" ng-show="$last" ng-click="addEventSlot()">+</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" style="width:130px;" ng-model="eventSlot.slotQuantity"/>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" style="width:130px;" ng-model="eventSlot.ratePerBlock"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="removefields" ng-show="$last" ng-click="removeEventSlot()">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=ChargeHeadID>Charge Head : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <dropdown-directive model="ChargeHeadID" datasource="LS_chargeheads"
+                                            textfield="v_ChargeHeadName" valuefield="v_ChargeHeadID"
+                                            isnull=true></dropdown-directive>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=ValidityStartDate>Validity Start Date : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#"
+                           href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       data-ng-bind="ValidityStartDate = (ValidityStartDate | date:'yyyy-MM-dd HH:mm:ss')">
+           							<span class="input-group-addon">
+           								<i class="glyphicon glyphicon-calendar"></i>
+           							</span>
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="ValidityStartDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                        </ul>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-5">
+                        <label title=ValidityEndDate>Validity End Date : </label>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#"
+                           href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       data-ng-bind="ValidityEndDate = (ValidityEndDate | date:'yyyy-MM-dd HH:mm:ss')">
+           							<span class="input-group-addon">
+           								<i class="glyphicon glyphicon-calendar"></i>
+           							</span>
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="ValidityEndDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                        </ul>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fninsertPolicyRatingClass();" data-dismiss="modal">Insert<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input validation-reset="Form" value="Close" class="btn ng-scope" type="button"
+                       ng-click=" displayPopUp = 'none';" aria-label="Close" data-dismiss="modal">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+<div class="modal" style="display:{{displayPopUp2}};" id="cronJob" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp2 = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Cron</h2>
+                <span id="message"></span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Scheduled Job Name : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ScheduledJobName"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Expression : </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <cron-selection output="myOutput"></cron-selection>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Output : </label>
+                    </div>
+                    <div class="col-sm-4">
+
+                        {{myOutput}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyName>Scheduled Job Description : </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ScheduledJobDescription"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="SaveBatch();">Create<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp2 = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top:20px;" class="fieldset ng-scope" ng-hide="displayPopUp">
+    <h1 class="legend ng-binding"> Create New Provisioning Batch </h1>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=ProcName>Provisioning API: </label>
+        </div>
+        <div class="col-sm-4">
+            <dropdown-directive model="ProcName" datasource="apis_f2" textfield="v_APIName" valuefield="v_APIID"
+                                isnull=true refresh=true onddchange="getInParamOfProc"/>
+        </div>
+    </div>
+    <div ng-show="ParamsDetails">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10" style="color: #00A000">
+                Please select the checkboxes that you wants to set as Default value for your inserted Batch.
+                And also do not select checkboxes of those values which are unnecessary .
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-6">
+
+                <label title="ParamName">Parameter</label>
+            </div>
+            <div class="col-sm-4">
+
+                <label title="ParamName">Type</label>
+            </div>
+        </div>
+
+    </div>
+    <div ng-show="ParamsDetails">
+        <div class="row" ng-repeat="procParamsDetail in procParamsDetails">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-6">
+                <input type="checkbox" ng-model="procParamsDetail.paramCheck"/>
+                {{procParamsDetail.appServerAPIParamName}}
+                <div ng-show="procParamsDetail.paramCheck">
+                    <div ng-if="procParamsDetail.ParamsDetails == 'bigint' || procParamsDetail.ParamsDetails == 'decimal' || procParamsDetail.ParamsDetails == 'varchar' || procParamsDetail.ParamsDetails == 'Binary'">
+                        <input type="text" ng-model="procParamsDetail.ProvBatchAPIParamDefValue"/>
+                    </div>
+                    <div ng-if="procParamsDetail.ParamsDetails == 'DateTime'">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="procParamsDetail.ProvBatchAPIParamDefValue"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                        </ul>
+                    </div>
+                    <!--<div ng-if="procParamsDetail.ParamsDetails == 'varchar'">-->
+                    <!--<textarea ng-model="procParamsDetail.ProvBatchAPIParamDefValue" />-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="col-sm-4">
+                {{procParamsDetail.ParamsDetails}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <label title="UploadCSV">Upload CSV File : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <input type="file" totalrows=totalrows fileread="allText"/>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <br/>
+
+    <p ng-hide="ParamsDetails">Documentation not available.</p>
+
+    <div class="row">
+
+        <div class="col-sm-2"/>
+        <div class="col-sm-10">
+            <a class="btn btn-primary" type="button" ng-click="proceedNext()">Proceed Next</span></a>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="displayPopUp">
+    <div class="col-sm-12">
+        <div ng-if="listpanel.gridOpts">
+            <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-edit ui-grid-exporter
+                 class="grid" ui-grid-refresh></div>
+        </div>
+    </div>
+</div>
+
+<div class="row fieldset" ng-show="displayPopUp">
+
+    <h1 class="legend"></h1>
+
+    <div class="col-sm-2"/>
+
+    <div class="col-sm-4">
+        <label title="ParamName">Remarks</label>
+
+    </div>
+
+    <div class="col-sm-4">
+        <textarea ng-model="remarks" style="margin: 0px; width: 275px; height: 133px;"/>
+
+    </div>
+    <div class="col-sm-2"/>
+
+</div>
+<div class="row" ng-show="displayPopUp">
+    <div class="col-sm-2">
+        <a class="btn btn-primary" type="button" ng-click="proceedBack()">Proceed Back</span></a>
+    </div>
+    <div class="col-sm-6">
+
+        <button type="button" class="btn btn-primary" ng-click="displayPopUp2 = ''" data-toggle="modal"
+                data-target="#cronJob">Save Batch
+        </button>
+
+    </div>
+    <div class="col-sm-4">
+        <a class="btn btn-primary" type="button" ng-click="ExecuteBatch()" style="float: left">Execute Batch <span
+                class="glyphicon glyphicon-ok"></span></a>
+    </div>
+</div>

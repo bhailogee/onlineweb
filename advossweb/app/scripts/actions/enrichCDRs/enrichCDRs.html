@@ -1,0 +1,71 @@
+<div class="modal" style="display:{{enrichPopUp}};" id="enrich" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="enrichPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Enrich Vendor CDRs Batch</h2>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-11" style="text-align:center">
+                        <label title=EnrichmentTimeStamp>You are about to Enrich Vendor CDRs.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="EnrichVendorRawCDRBatch();" data-dismiss="modal">Enrich
+                    Vendor CDRs Batch <span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="enrichPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-left:10px;" ng-hide="enrichErrors">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">Vendor CDRs Errors</h1>
+
+            <div ng-if="listpanel.gridOpts">
+                <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                     class="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope" ng-hide="enrichErrors">
+
+    <button type="button" class="btn btn-primary" ng-click="enrichPopUp = ''" data-toggle="modal" data-target="#enrich">
+        Enrich Vendor CDRs Batch
+    </button>
+
+</div>
+
+<div style="margin-left:10px;" ng-show="enrichErrors">
+    <div class="row">
+        <div class="col-sm-10">
+            <h1 class="heading ng-binding">Vendor CDRs Errors Detail </h1>
+        </div>
+        <div class="col-sm-2" style="text-align:right;">
+            <a ng-click="VendorCDRsByErrorMask(); enrichErrors=false;"
+               style="text-decoration: underline; cursor:pointer; color: blue; text-align:right;">
+                Back
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div ng-if="listpanel.gridOpts">
+                <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                     class="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>

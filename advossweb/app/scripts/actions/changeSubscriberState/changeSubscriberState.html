@@ -1,0 +1,68 @@
+<div class="modal" style="display:{{displayPopUp}};" id="changeSubscriberState" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Change Subscriber State</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=StateStimulusID>State Stimulus : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="StateStimulusID" datasource="LS_statestimuli"
+                                            textfield="v_StimulusDescription"
+                                            valuefield="v_StateStimulusID"></dropdown-directive>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=SubscriberStateID>Subscriber State : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="SubscriberStateID" datasource="LS_subscriberstates"
+                                            textfield="v_SubscriberStateName"
+                                            valuefield="v_SubscriberStateID"></dropdown-directive>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fnchangeSubscriberState();">Update<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fieldset ng-scope">
+
+    <h1 class="legend ng-binding"> Change Subscriber State </h1>
+
+    <div ng-class-even="'alternative_cls_even'" ng-class-odd="'alternative_cls_odd'"
+         class="ng-scope alternative_cls_even">
+        <div style="margin:0px;" class="row">
+            <div class="col-sm-3"><label class="applabel ng-binding">AccNo State : </label></div>
+            <div class="col-sm-8"><label class="appvalue ng-binding">{{SubscriberStateName}}</label></div>
+
+            <hr style="margin-top: 02px; margin-bottom: 02px; border: 0; border-top: 1px solid #eee;">
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#changeSubscriberState">Change Subscriber State
+    </button>
+
+</div>

@@ -1,0 +1,125 @@
+<div style="margin-top:20px;" class="fieldset ng-scope" ng-hide="nextPage">
+    <h1 class="legend ng-binding"> Vendor Rerating </h1>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=VendorID>Vendor : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <dropdown-directive model="VendorID" datasource="LS_vendors" textfield="v_VendorName"
+                                valuefield="v_VendorID" isnull=true refresh=true onddchange="getVendorTrunks"/>
+        </div>
+    </div>
+
+    <div class="row" ng-if="listVendorTunk">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=VendorID>Vendor Trunk : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <dropdown-directive model="VendorTrunkID" datasource="{{listVendorTunk}}" textfield="v_DefaultURI"
+                                valuefield="v_VendorTrunkID" isnull=true refresh=true onddchange="getPolicyPrefix"/>
+        </div>
+    </div>
+
+    <div class="row" ng-if="listPolicyPrefix">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=VendorID>Destination Name : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <dropdown-directive model="PolicyPrefixID" datasource="{{listPolicyPrefix}}" textfield="v_DestName"
+                                valuefield="v_PolicyPrefixID" isnull=true refresh=true onddchange="getDestinationName"/>
+        </div>
+    </div>
+
+    <div class="row" ng-show="listPolicyPrefix">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=FromTime>From Time : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                           data-ng-model="FromTime = (FromTime | date:'yyyy-MM-dd HH:mm:ss')">
+					<span class="input-group-addon" ng-click="FromTime=''">
+			            <i class="glyphicon glyphicon-refresh"></i>
+			        </span>
+                </div>
+            </a>
+
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="FromTime"
+                                data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+            </ul>
+        </div>
+
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row" ng-show="listPolicyPrefix">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=ToTime>To Time : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                           data-ng-model="ToTime = (ToTime | date:'yyyy-MM-dd HH:mm:ss')">
+					<span class="input-group-addon" ng-click="ToTime=''">
+			            <i class="glyphicon glyphicon-refresh"></i>
+			        </span>
+                </div>
+            </a>
+
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="ToTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+            </ul>
+        </div>
+
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row" style="margin-top:10px;" ng-show="listPolicyPrefix">
+        <div class="col-sm-4"/>
+        <div class="col-sm-2">
+            <a class="btn btn-primary" type="button" ng-click="addMore()">Add</span></a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;" ng-if="recordListFlag">
+        <h1 style="text-align:center">Record List</h1>
+
+        <div class="col-sm-12">
+            <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter class="grid"
+                 ui-grid-refresh></div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="recordListFlag">
+        <div class="col-sm-10"/>
+        <div class="col-sm-2">
+            <a class="btn btn-primary" type="button" ng-click="redoVendorRating()">Execute Now <span
+                    class="glyphicon glyphicon-ok"></span></a>
+        </div>
+    </div>
+</div>
+
+
+<div ng-show="nextPage">
+    <div style="margin-top:3%;" class="fieldset ng-scope">
+        <h2 class="legend ng-binding"> Vendor Rating Status</h2>
+
+        <div class="row">
+            <h4 style="text-align:center;">Vendor Rating Started Sucessfully.</h4>
+        </div>
+    </div>
+</div>

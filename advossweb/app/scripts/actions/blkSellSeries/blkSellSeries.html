@@ -1,0 +1,258 @@
+<div style="margin-top:20px;" class="fieldset ng-scope" ng-hide="nextPage">
+    <h1 class="legend ng-binding"> Sell Vouchers </h1>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=DealerID>Dealer : </label>
+        </div>
+
+        <div class="col-sm-4" ng-hide="DealerID">
+            <dropdown-directive model="DealerID" datasource="DB_GetDealerCSR" textfield="v_DealerName"
+                                valuefield="v_DealerID" isnull=true refresh=true onddchange="getDealer"/>
+        </div>
+        <div class="col-sm-2" ng-show="DealerID">
+            {{dealerName}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="DealerID">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=DealerID>Discount Percentage : </label>
+        </div>
+
+        <div class="col-sm-4">
+            {{discountPercentage}}
+        </div>
+    </div>
+    <br/>
+
+    <div ng-show="DealerID" ng-repeat="sellSeries in sellSeriess">
+        <div class="row" ng-show="$last && !sellSeries.EndingSerialNumber">
+            <div class="col-sm-2"/>
+            <div class="col-sm-3">
+                <label title=SerialPrefix>Search Criteria</label>
+            </div>
+
+            <div class="col-sm-3">
+                <dropdown-directive model="criteria" isnull=true datasource="{{searchCriteria}}" textfield="fieldName"
+                                    valuefield="fieldVal" refresh=true></dropdown-directive>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row" ng-show="$last && !sellSeries.EndingSerialNumber && criteria=='BatchName'">
+            <div class="col-sm-2"/>
+            <div class="col-sm-3">
+                <label title=SerialPrefix>Batch Name</label>
+            </div>
+
+            <div class="col-sm-3">
+                <dropdown-directive model="sellSeries.PrepaidCardSeriesID" isnull=true
+                                    datasource="DB_GetAvailablePrepaidcards" textfield="v_BatchName"
+                                    valuefield="v_PrepaidCardSeriesID" refresh=true></dropdown-directive>
+            </div>
+            <div class="col-sm-2">
+                <a type="button" ng-show="$last"
+                   ng-click="getValueOfBatch(sellSeries.SerialPrefix,sellSeries.SerialNo,sellSeries.PrepaidCardSeriesID);"
+                   data-toggle="modal" data-target="#Securitykey"><img src="/images/icons/check.gif"
+                                                                       alt="File Process Icon" height="25"
+                                                                       width="25"></a>
+                <button class="removefields" ng-show="$last" ng-click="removePPCSeries()">-</button>
+            </div>
+        </div>
+
+        <div class="row" ng-show="$last && !sellSeries.EndingSerialNumber && criteria=='SerialPrefix'">
+            <div class="col-sm-2"/>
+            <div class="col-sm-3">
+                <label title=SerialPrefix>Serial Prefix</label>
+            </div>
+
+            <div class="col-sm-3">
+                <label title=SerialNo>Serial No of First Card</label>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row" ng-show="$last && !sellSeries.EndingSerialNumber && criteria=='SerialPrefix'">
+            <div class="col-sm-2"/>
+            <div class="col-sm-3">
+                <input type="text" size="17" ng-model="sellSeries.SerialPrefix"/>
+            </div>
+
+            <div class="col-sm-2">
+                <input type="text" size="17" ng-model="sellSeries.SerialNo"/>
+            </div>
+            <div class="col-sm-2">
+                <a type="button" ng-show="$last"
+                   ng-click="getValueOfBatch(sellSeries.SerialPrefix,sellSeries.SerialNo,sellSeries.PrepaidCardSeriesID);"
+                   data-toggle="modal" data-target="#Securitykey"><img src="/images/icons/check.gif"
+                                                                       alt="File Process Icon" height="25"
+                                                                       width="25"></a>
+                <button class="removefields" ng-show="$last" ng-click="removePPCSeries()">-</button>
+            </div>
+        </div>
+
+        <div class="row" ng-show="sellSeries.EndingSerialNumber">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SerialPrefix>Serial Prefix</label>
+            </div>
+
+            <div class="col-sm-4">
+                {{sellSeries.SerialPrefix}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row" ng-show="sellSeries.EndingSerialNumber" style="text-align:center;">
+            <div class="col-sm-2"/>
+            <div class="col-sm-2" style="text-align:left;">
+                <label title=BatchName>Batch Name</label>
+            </div>
+            <div class="col-sm-3">
+                <label title=StartingSerialNumber>Starting Serial Number</label>
+            </div>
+            <div class="col-sm-2">
+                <label title=EndingSerialNumber>Ending Serial Number</label>
+            </div>
+        </div>
+
+        <div class="row" ng-show="sellSeries.EndingSerialNumber" style="text-align:center;">
+            <div class="col-sm-1"/>
+            <div class="col-sm-1">
+                Sr. {{$index+1}}
+            </div>
+            <div class="col-sm-2" style="text-align:left;">
+                {{sellSeries.BatchName}}
+            </div>
+            <div class="col-sm-3">
+                {{sellSeries.StartingSerialNumber}}
+            </div>
+            <div class="col-sm-2">
+                {{sellSeries.EndingSerialNumber}}
+            </div>
+            <div class="col-sm-3">
+                <button class="addfields" ng-show="$last && sellSeries.EndingSerialNumber" ng-click="addPPCSeries()">+
+                </button>
+                <button class="removefields" ng-show="$last && sellSeries.EndingSerialNumber"
+                        ng-click="removePPCSeries()">-
+                </button>
+            </div>
+        </div>
+        <br/>
+    </div>
+
+    <div ng-show="dealerCardSaleNumbersRawS.length > 0">
+        <div class="row">
+            <div class="col-sm-1"/>
+            <div class="col-sm-1" style="text-align:right;">
+                <label title=DealerID>Sr.</label>
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                <label title=DealerID>Amount PerCard</label>
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                <label title=DealerID>Quantity</label>
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                <label title=DealerID>Total Amount</label>
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                <label title=DealerID>Sale Amount</label>
+            </div>
+        </div>
+
+        <div class="row" ng-repeat="DCNRS in dealerCardSaleNumbersRawS">
+            <div class="col-sm-1"/>
+            <div class="col-sm-1" style="text-align:right;">
+                {{$index+1}}
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                {{DCNRS.v_AmountPerCard}}
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                {{DCNRS.v_SelectedEndingSerialNumber - DCNRS.v_SelectedStartingSerialNumber + 1}}
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                {{DCNRS.v_AmountLineItem}}
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                {{DCNRS.v_AmountLineItem*(1-discountPercentage/100)}}
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="row">
+            <div class="col-sm-4"/>
+            <div class="col-sm-2" style="text-align:right;">
+                <label title=DealerID>Total Vochers = </label> {{TotalVochers}}
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                <label title=DealerID>Total Amount = </label> {{TotalAmountCal}}
+            </div>
+            <div class="col-sm-2" style="text-align:right;">
+                <label title=DealerID>Sale Amount = </label> {{SaleAmount}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;" ng-show="sellSeriess[0].EndingSerialNumber > 0">
+        <div class="col-sm-4"/>
+        <div class="col-sm-2">
+            <a class="btn btn-primary" type="button" ng-click="insertDealerSaleRaw()">Calculate <span
+                    class="glyphicon glyphicon-ok"></span></a>
+        </div>
+        <div class="col-sm-2">
+            <a class="btn btn-primary" type="button" ng-click="processDealerCardSaleRaw()" ng-show="availableToSell">Sell
+                <span class="glyphicon glyphicon-ok"></span></a>
+        </div>
+    </div>
+</div>
+
+<div ng-show="nextPage">
+
+    <div style="margin-top:3%;" class="fieldset ng-scope">
+        <h2 class="legend ng-binding"> Vouchers Selling Response </h2>
+
+        <div class="row" ng-show="returnCode > 0">
+            <p style="text-align:center">
+                Error While Selling Vouchers.
+                Error Code = {{returnCode}}.
+            </p>
+
+            <h4 ng-click="nextPage=false;returnCode=' ';"
+                style="text-decoration: underline; cursor:pointer; color: blue; text-align:center;">Please Click Here To
+                Try Again.</h4>
+        </div>
+
+        <div class="row" ng-hide="returnCode == 0 || returnCode > 0">
+
+            <div class="col-sm-12">
+
+                <h4 style="text-align:center;">
+                    Please Wait your Vouchers are Selling.
+                </h4>
+
+            </div>
+
+            <div class="col-sm-12" style="text-align:center;">
+                <img src="/images/FileProcess.gif" alt="File Process Icon">
+            </div>
+
+        </div>
+
+        <div class="row" ng-show="returnCode==0">
+
+            <div class="col-sm-12">
+
+                <h4 style="text-align:center;">
+                    Your Vouchers has been sold.
+                </h4>
+
+            </div>
+        </div>
+    </div>
+</div>

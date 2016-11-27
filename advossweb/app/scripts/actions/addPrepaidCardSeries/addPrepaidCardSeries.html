@@ -1,0 +1,606 @@
+<script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"/>
+
+<div class="fieldset ng-scope" style="margin-top:10px;" ng-show="insert">
+
+    <h1 class="legend ng-binding">Add Prepaid Cards</h1>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=BatchName>Batch Name : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="BatchName" style="width = 80%"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=CardType>Card Type : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <dropdown-directive model="CardType" datasource="{{cardType}}" textfield="CardTypeName"
+                                valuefield="CardTypeValue" refresh=true></dropdown-directive>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-sm-2" />
+        <div class="col-sm-4">
+            <label title=SerialPrefix>Serial Prefix Pattern : </label>
+        </div>
+        <div class="col-sm-6">
+            <input type="radio" ng-model="SerialPrefixType" value="old"/> Old Pattern
+            <input type="radio" ng-model="SerialPrefixType" value="new" ng-click="SerialPrefix=''"/> New Pattern
+        </div>
+    </div> -->
+
+    <div class="row" ng-show="SerialPrefixType == 'old'">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=SerialPrefix>Serial Prefix : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <dropdown-directive model="SerialPrefix" datasource="agentserialprefixes_f1" textfield="v_SerialPrefix"
+                                valuefield="v_SerialPrefix" isnull=true refresh=true onddchange=getValueOfSerialPrefix/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=PinLength>Serial Number Length : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="SerailNumberLength"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <!-- <div class="row" ng-show="SerialPrefixType == 'new'">
+        <div class="col-sm-2" />
+        <div class="col-sm-4">
+            <label title=SerialPrefix>Serial Prefix : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="SerialPrefix"/>
+        </div>
+        <div class="col-sm-2" />
+    </div> -->
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=TotalNumberOfCards>Total Number Of PIN/Scratch Card : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="TotalNumberOfCards"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=Amount>Amount : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="Amount"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=Tax1>Tax1 : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="Tax1"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=Tax2>Tax2 : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="Tax2"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=LapseDays>Lapse Days : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="LapseDays"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=PinLength>Pin Length : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="PinLength"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=PINMask>PIN Mask : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="PINMask"/>
+            <a type="button" ng-click="displayPopUp = ''" data-toggle="modal" data-target="#MaskPIN"><img
+                    src="/images/icons/info.gif" alt="File Process Icon" height="15" width="15"></a>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=PhaseNumber>Phase Number : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="PhaseNumber"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=Notes>Notes : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <textarea ng-model="Notes"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=KeyString>Key String : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="KeyString"/>
+            <a type="button" ng-click="displayPopUp2 = ''" data-toggle="modal" data-target="#Securitykey"><img
+                    src="/images/icons/info.gif" alt="File Process Icon" height="15" width="15"></a>
+        </div>
+        <div class="col-sm-3"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=ExpiryDate>Expiry Date : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-group" style="width:67%">
+                    <input type="text" class="form-control"
+                           data-ng-model="ExpiryDate = (ExpiryDate | date:'yyyy-MM-dd HH:mm:ss')">
+					<span class="input-group-addon" ng-click="ExpiryDate=''">
+			            <i class="glyphicon glyphicon-refresh"></i>
+			        </span>
+                </div>
+            </a>
+
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="ExpiryDate"
+                                data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+            </ul>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6"/>
+
+        <div class="col-sm-6">
+            <a class="btn btn-primary" type="button" ng-click="getStartEndSerialPrefixes()">Confirm <span
+                    class="glyphicon glyphicon-ok"></span></a>
+        </div>
+    </div>
+</div>
+
+<div ng-show="confirm">
+
+    <h4 ng-click="insert=true;confirm=false" style="text-decoration: underline; cursor:pointer; color: blue;">Back</h4>
+
+    <div class="fieldset ng-scope" style="margin-top:10px;">
+        <h2 class="legend ng-binding"> Your {{CardType}}s will generate with following values </h2>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=BatchName>Batch Name : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{BatchName}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=CardType>Card Type : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{CardType}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SerialPrefix>Serial Prefix : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{SerialPrefix}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SerialNoPattern>Serial No Pattern : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{SerialNoPattern}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=TotalNumberOfCards>Total Number Of Cards : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{TotalNumberOfCards}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=StartingSerialNumber>Starting Serial Number : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{StartingSerialNumber}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=EndingSerialNumber>Ending Serial Number : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{EndingSerialNumber}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=Amount>Amount : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{Amount}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=Tax1>Tax1 : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{Tax1}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=Tax2>Tax2 : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{Tax2}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=LapseDays>Lapse Days : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{LapseDays}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=PinLength>Pin Length : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{PinLength}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=PINMask>PIN Mask : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{PINMask}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=PhaseNumber>Phase Number : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{PhaseNumber}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=Notes>Notes : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{Notes}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=KeyString>Key String : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{KeyString}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=ExpiryDate>Expiry Date : </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{ExpiryDate}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4"/>
+
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary" ng-click="fnaddPrepaidCardSeries();">Generate <span
+                        class="glyphicon glyphicon-ok"></span></button>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+    </div>
+</div>
+
+<div ng-show="generate">
+
+    <div style="margin-top:3%;" class="fieldset ng-scope">
+        <h2 class="legend ng-binding"> {{CardType}}s Generation Response </h2>
+
+        <div class="row" ng-show="returnCode > 0">
+            <p style="text-align:center">
+                Error While Generating {{CardType}}.
+                Error Code = {{returnCode}}.
+            </p>
+
+            <h4 ng-click="insert=false;confirm=true;generate=false;returnCode=' ';"
+                style="text-decoration: underline; cursor:pointer; color: blue; text-align:center;">Please Click Here To
+                Try Again.</h4>
+        </div>
+
+        <div class="row" ng-hide="returnCode == 0 || returnCode > 0">
+
+            <div class="col-sm-12">
+
+                <h4 style="text-align:center;">
+                    Please Wait your {{CardType}}s are Generating.
+                </h4>
+
+            </div>
+        </div>
+
+        <div class="row" ng-hide="returnCode == 0 || returnCode > 0">
+
+            <div class="col-sm-12" style="text-align:center;">
+                <img src="/images/FileProcess.gif" alt="File Process Icon">
+            </div>
+        </div>
+
+        <div ng-show="returnCode==0">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 style="text-align:center;">
+                        Your {{CardType}}s has been generated.
+                        Please Download.
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"/>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary" ng-csv="prepaidCard" filename="{{BatchName}}.csv">
+                        Download <span class="glyphicon glyphicon-ok"></span>
+                        <!-- <button type="button" class="btn btn-primary" ng-click="exportData()">Download <span class="glyphicon glyphicon-ok"></span></button>			 -->
+                </div>
+                <div class="col-sm-2" ng-hide="TWHPinNull == 0">
+                    <button type="button" class="btn btn-primary" ng-click="modPPCardSeriesTWHPinNull()">Delete TWHP
+                        <span class="glyphicon glyphicon-ok"></span></button>
+                </div>
+                <div class="col-sm-4" ng-hide="TWHPinNull == 0">
+                    <p>
+                        * Tow Way Hash PIN
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="exportable" style="display: none">
+            <table width="50%">
+                <tbody>
+                    <tr><td>Batch Name</td><td>{{BatchName}}</td></tr>
+                    <tr><td>Card Type</td><td>{{CardType}}</td></tr>
+                    <tr><td>Amount</td><td>{{Amount}}</td></tr>
+                    <tr><td>Total Number Of Cards</td><td>{{TotalNumberOfCards}}</td></tr>
+                    <tr><td>Starting Serial Number</td><td>{{StartingSerialNumber}}</td></tr>
+                    <tr><td>Ending Serial Number</td><td>{{EndingSerialNumber}}</td></tr>
+                    <tr><td>Notes</td><td>{{Notes}}</td></tr>
+                    <tr><td>Lapse Days</td><td>{{LapseDays}}</td></tr>
+                    <tr><td>Expiry Date</td><td>{{ExpiryDate}}</td></tr>
+                    <tr/>
+                </tbody>
+            </table>
+            <table width="50%">
+                <thead>
+                    <tr>
+                        <th>Serial Number</th>
+                        <th>PIN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in prepaidCard">
+                        <td>{{item.v_SerialPrefix}}</td>
+                        <td>{{item.v_PIN}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+    </div>
+</div>
+
+<div class="modal" style="display:{{displayPopUp2}};" id="Securitykey" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="displayPopUp2 = 'none';" type="button" ng-class="{'close':showasmodal}"
+                        data-dismiss="modal" aria-label="Close" class="ng-scope close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Security key Guide</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <p>
+                            Security key through which this batch would be encrypted. It is only taken in the GUI and
+                            NOT stored anywhere.
+                        </p>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="MaskPIN" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="displayPopUp = 'none';" type="button" ng-class="{'close':showasmodal}"
+                        data-dismiss="modal" aria-label="Close" class="ng-scope close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">PIN Mask Guide</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"/>
+                    <div class="col-sm-10">
+                        <p>
+                            If PIN Mask = nn********nn Then 1234567890 would be stored as 12******90.
+                        </p>
+                    </div>
+                    <div class="col-sm-1"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,401 @@
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+
+<div ng-show="ABMFID">
+    <div class="modal" style="display:{{displayPopUp}};" id="populateInvoiceByDate" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal"
+                            aria-label="Close" ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 class="modal-title">Populate Invoice By Date</h2>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=FromInvoiceDate>From Invoice Date : </label>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown"
+                               data-target="#" href="#">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                           data-ng-model="FromInvoiceDate = (FromInvoiceDate | date:'yyyy-MM-dd HH:mm:ss')">
+									<span class="input-group-addon" ng-click="FromInvoiceDate=''">
+							            <i class="glyphicon glyphicon-refresh"></i>
+							        </span>
+                                </div>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="FromInvoiceDate"
+                                                data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-1"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=ToInvoiceDate>To Invoice Date : </label>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown"
+                               data-target="#" href="#">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                           data-ng-model="ToInvoiceDate = (ToInvoiceDate | date:'yyyy-MM-dd HH:mm:ss')">
+									<span class="input-group-addon" ng-click="ToInvoiceDate=''">
+							            <i class="glyphicon glyphicon-refresh"></i>
+							        </span>
+                                </div>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="ToInvoiceDate"
+                                                data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                            </ul>
+                        </div>
+                        <div class="col-sm-1"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=Description>Description : </label>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <textarea ng-model="Description"/>
+                        </div>
+                        <div class="col-sm-1"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2"/>
+                        <div class="col-sm-4">
+                            <label title=InvoiceReferenceNo>Invoice Reference No : </label>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="InvoiceReferenceNo"/>
+                        </div>
+                        <div class="col-sm-1"/>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-primary" type="button"
+                       ng-click="fnpopulateABMFInvoiceByDates();displayPopUp = 'none';" data-dismiss="modal">Populate
+                        Invoice <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                           ng-click="displayPopUp = 'none'"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ng-scope">
+        <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+                data-target="#populateInvoiceByDate">Add
+        </button>
+    </div>
+</div>
+
+<div ng-hide="ABMFID">
+    <div class="fieldset ng-scope" style="margin-top:10px;" ng-hide="populateInvoice">
+        <h1 class="legend ng-binding">Populate Invoice By Date</h1>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <label title=ABMFID>ABMF : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <input type="text" ng-model="ABMFID"/>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <label title=FromInvoiceDate>From Invoice Date : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                    <div class="input-group" style="width:67%">
+                        <input type="text" class="form-control"
+                               data-ng-model="FromInvoiceDate = (FromInvoiceDate | date:'yyyy-MM-dd HH:mm:ss')">
+						<span class="input-group-addon" ng-click="FromInvoiceDate=''">
+				            <i class="glyphicon glyphicon-refresh"></i>
+				        </span>
+                    </div>
+                </a>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="FromInvoiceDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                </ul>
+            </div>
+
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=ToInvoiceDate>To Invoice Date : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                    <div class="input-group" style="width:67%">
+                        <input type="text" class="form-control"
+                               data-ng-model="ToInvoiceDate = (ToInvoiceDate | date:'yyyy-MM-dd HH:mm:ss')">
+						<span class="input-group-addon" ng-click="ToInvoiceDate=''">
+				            <i class="glyphicon glyphicon-refresh"></i>
+				        </span>
+                    </div>
+                </a>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="ToInvoiceDate"
+                                    data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                </ul>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=Description>Description : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <textarea ng-model="Description"/>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=InvoiceReferenceNo>Invoice Reference No : </label>
+            </div>
+
+            <div class="col-sm-4">
+                <input type="text" ng-model="InvoiceReferenceNo"/>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+        <br/>
+
+        <div class="row">
+            <div class="col-sm-6"/>
+
+            <div class="col-sm-6">
+                <a class="btn btn-primary" type="button" ng-click="fnpopulateABMFInvoiceByDates();">Populate
+                    Invoice<span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center">
+        <a ng-click="downloadPDF();" ng-show="populateInvoice"
+           style="text-decoration: underline; cursor:pointer; color: blue; text-align:left;">
+            Print
+        </a>
+    </div>
+
+    <div class="fieldset ng-scope" style="margin-top:10px;" ng-show="populateInvoice" id="printArea">
+
+        <div style="float:left">
+            <img src="/images/logo1.png"/>
+        </div>
+
+        <div style="float:right;margin-right:100px">
+            <p>
+                {{AgentContact.v_CustomerName}} <br/>
+                {{AgentContact.v_Address}} <br/>
+                {{AgentContact.v_City}} ,{{AgentContact.v_Country}} <br/>
+                {{AgentContact.v_LandLine_Tel}} <br/>
+                {{AgentContact.v_Email}}
+            </p>
+        </div>
+
+        <div style="height:10px; width:100%; background-color:#FF9900; display:inline-block"/>
+
+        <div style="float:left;margin-left:20px">
+            <h1>Invoice</h1>
+            <strong>{{Customer.v_CustomerName}}</strong> <br/>
+            <strong>{{Customer.v_Address1}} {{Customer.v_Address2}}</strong> <br/>
+            <strong>{{Customer.v_City}}</strong> <br/>
+            <strong>{{Customer.v_Country}}</strong> <br/>
+            <strong>Attention: {{ABMFContact.v_CustomerName}}</strong> <br/>
+            <strong style="margin-left:70px">{{ABMFContact.v_Designation}}</strong> <br/>
+            <strong style="margin-left:70px">{{ABMFContact.v_LandLine_Tel}}</strong> <br/>
+        </div>
+
+        <div style="float:right;margin-right:20px">
+            <br/><br/>
+            <table>
+                <tr>
+                    <td><strong>Invoice Date:</strong></td>
+                    <td>{{InvoiceDate}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Invoice Due Date:</strong></td>
+                    <td>{{InvoiceDueDate}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Payment Terms:</strong></td>
+                    <td>{{PaymentTerms}}</td>
+                </tr>
+                <!-- <tr><td><strong>S/ Terms:</strong></td><td></td></tr> -->
+                <!-- <tr><td><strong>Delivery:</strong></td><td></td></tr> -->
+                <tr>
+                    <td><strong>Currency:</strong></td>
+                    <td>{{Agent.v_CurrencyName}}</td>
+                </tr>
+                <!-- <tr><td><strong>Prepaired By:</strong></td><td>{{AdminInfor.v_UserName}}</td></tr> -->
+                <!-- <tr><td></td><td>{{AdminInfor.v_Tel}}</td></tr> -->
+                <tr>
+                    <td><strong>Invoice NO:</strong></td>
+                    <td>{{Invoice.v_InvoiceReferenceNo}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="table" style="margin-left:5%;width:100%;display:inline-block">
+            <br/>
+            <table style="width:90%" border="1">
+                <tr>
+                    <th>Item</th>
+                    <th>Unit</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price / Annum</th>
+                </tr>
+                <tr ng-repeat="x in InvoiceData">
+                    <td align="center">{{$index+1}}</td>
+                    <td align="center">{{x.Unit}}</td>
+                    <td align="center">{{x.Description}}</td>
+                    <td align="center">1</td>
+                    <td>
+                        <table style="width:90%" border="0">
+                            <tr>
+                                <td style="padding-left:5%">{{Agent.v_CurrencyName}}</td>
+                                <td align="right">{{x.Amount}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="right"><strong>Vat 5%</strong></td>
+                    <td>
+                        <table style="width:90%" border="0">
+                            <tr>
+                                <td style="padding-left:5%">{{Agent.v_CurrencyName}}</td>
+                                <td align="right">{{Invoice.v_TotalInvoicePaymentTaxes}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="right"><strong>Total Amount Due</strong></td>
+                    <td>
+                        <table style="width:90%" border="0">
+                            <tr>
+                                <td style="padding-left:5%">{{Agent.v_CurrencyName}}</td>
+                                <td align="right">{{Invoice.v_InvoiceDueAmount}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="float:left; display:inline-block; width:750px;margin-left:20px">
+            <br/>
+
+            <p><strong>Period Covered</strong>:<br/>
+                {{fromDate}} To {{toDate}}
+        </div>
+        <br/>
+
+        <div style="float:left; margin-left:70px; display:inline-block; width:750px">
+            <strong>Payment Due:</strong><br/>
+            Please ensure All Charges Payable To: <br/><br/>
+            Broadbased Communications Ltd <br/>
+            <table>
+                <tr>
+                    <td><strong>Bank: </strong></td>
+                    <td>{{Agent.v_BankName}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Branch: </strong></td>
+                    <td>{{Agent.v_BankBranch}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Account No: </strong></td>
+                    <td>{{Agent.v_BankAccountNumber}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Account Name: </strong></td>
+                    <td>{{Agent.v_BankAccountName}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Sort-Code: </strong></td>
+                    <td>{{Agent.v_BankSortCode}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Vat Reg No: </strong></td>
+                    <td>{{Agent.v_BankVatRegNo}}</td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+
+        <!-- <div style="float:left; display:inline-block; width:750px">
+            <table width="750px">
+                <tr>
+                    <td><hr></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Approved By </strong></td>
+                    <td><strong>{{ApprovedBy}}</strong></td>
+                    <td><strong>Date</strong></td>
+                </tr>
+                <tr>
+                    <td />
+                    <td>{{ApprovedByDesignation}}</td>
+                    <td>{{currentDate}}</td>
+                </tr>
+            </table>
+        </div> -->
+        <div style="height:10px; width:100%; background-color:#FF9900; display:inline-block"/>
+        {{InvoiceVersion}}
+    </div>
+</div>
+</div>

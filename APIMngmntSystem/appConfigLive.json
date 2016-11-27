@@ -1,0 +1,37 @@
+{
+	"port": 3335,
+	"isDebug": true,
+	"timeFormat": "dd/mm/yy hh:MM:ss:ffff",
+	"definedAPIs": [ "mysql" ],
+	"env": "dev",
+	"baseAPI": "mysql",
+	"schema": "ServerSchema.json",
+	"apiManagerSchema": "applicationSchema.json",
+	"packageName": "productmetadata",
+	"endpoint": "./socket/socket.js",
+	"hangedSessionsTimer": 3000,
+	"connection": {
+		"host": "138.201.69.141",
+		"port": 3306,
+		"user": "root",
+		"password": "hhd+I1d*8lzN",
+		"database": "productmetadata"
+	},
+	"txc": {
+		"host": "138.201.69.139",
+		"port": 5678,
+		"pool": 50
+	},
+	"connectionTransaction": {
+		"acquireTimeout": 120000,
+		"connectionLimit": 100,
+		"database": "productmetadata",
+		"host": "138.201.69.141",
+		"multipleStatements": true,
+		"password": "hhd+I1d*8lzN",
+		"port": 3306,
+		"queueLimit": 0,
+		"user": "root",
+		"waitForConnections": true
+	}
+}

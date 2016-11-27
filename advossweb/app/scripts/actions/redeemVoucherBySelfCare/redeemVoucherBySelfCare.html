@@ -1,0 +1,40 @@
+<div class="modal" style="display:{{displayPopUp}};" id="redeemVoucherBySelfCare" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Redeem Voucher</h2>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=PIN>PIN : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="PIN"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fnredeemVoucherBySelfCare();">Redeem Voucher<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <a href="#" data-toggle="modal" data-target="#redeemVoucherBySelfCare" class="btn btn-primary"
+       value="Redeem Voucher By Self Care" ng-click="displayPopUp = ''">Redeem Voucher</a>
+
+</div>

@@ -1,0 +1,74 @@
+<div id="dashboard{{$root.currentState}}">
+    <div ng-if="dashboardScope.dashboard.tabs.length>1">
+        <ul class="{{dashboardScope.dashboard.tabsClass}}">
+            <li ng-repeat="tab in dashboardScope.dashboard.tabs"
+                ng-class="{active:$index==(dashboardScope.activeTab || 0)}">
+                <a data-target="#{{dashboardScope.dashboardname+'_'+utility.removeSpace(tab.tabname)}}"
+                   ng-click="dashboardScope.activeTab=$index; broadcastTabChange($index);" data-toggle="tab">{{tab.tabname}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-class="dashboardScope.dashboard.tabs.length>1 ? 'tab-content':''">
+
+        <div ng-repeat="tab in dashboardScope.dashboard.tabs" ng-if="tab.tabs">
+            <ul class="{{dashboardScope.dashboard.tabsClass}} tabsClass-internal">
+                <li ng-repeat="tab2 in tab.tabs" ng-class="{active:$index==0}">
+                    <a data-target="#{{dashboardScope.dashboardname+'_'+utility.removeSpace(tab2.tabname)}}"
+                       data-toggle="tab">{{tab2.tabname}}</a>
+                </li>
+            </ul>
+        </div>
+        <div ng-repeat="tab in dashboardScope.dashboard.tabs"
+             id="{{dashboardScope.dashboardname+'_'+utility.removeSpace(tab.tabname)}}"
+             ng-class="dashboardScope.dashboard.tabs.length>1 ? ($index == (dashboardScope.activeTab || 0)?'active tab-pane':'fade tab-pane'):''"
+             class="{{tab.class}}">
+
+            <!--<ul ng-if="tab.tabs" class="{{dashboardScope.dashboard.tabsClass}}">
+                <li ng-repeat="tab2 in tab.tabs" ng-class="{active:$index==0}">
+                    <a data-target="#{{dashboardScope.dashboardname+'_'+utility.removeSpace(tab2.tabname)}}" data-toggle="tab">{{tab2.tabname}}</a>
+                </li>
+            </ul>`-->
+            <h1 ng-if="tab.heading">{{SchemaService.getHeading(tab)}}</h1>
+
+            <div ng-repeat="view in tab.views">
+
+                <div ng-if="dashboardScope.viewObjects[view]" ng-switch="dashboardScope.viewObjects[view].panelType"
+                     class="{{dashboardScope.viewObjects[view].class}}">
+                    <div ng-switch-when="ReadOnlyView" dashboard="dashboardScope" detailspanel-directive
+                         view-object="dashboardScope.viewObjects[view]"
+                         tabindex="{{dashboardScope.dashboard.tabs.indexOf(tab)}}"></div>
+                    <div ng-switch-when="UpdateableView" dashboard="dashboardScope" editpanel-directive
+                         view-object="dashboardScope.viewObjects[view]"
+                         tabindex="{{dashboardScope.dashboard.tabs.indexOf(tab)}}"></div>
+                    <div ng-switch-when="InsertView" dashboard="dashboardScope" insertpanel-directive
+                         view-object="dashboardScope.viewObjects[view]"
+                         tabindex="{{dashboardScope.dashboard.tabs.indexOf(tab)}}"></div>
+                    <div ng-switch-when="ListView" dashboard="dashboardScope" listpanel-directive
+                         view-object="dashboardScope.viewObjects[view]"
+                         tabindex="{{dashboardScope.dashboard.tabs.indexOf(tab)}}"></div>
+                    <div ng-switch-when="SearchView" dashboard="dashboardScope" searchpanel-directive
+                         view-object="dashboardScope.viewObjects[view]"
+                         tabindex="{{dashboardScope.dashboard.tabs.indexOf(tab)}}"></div>
+                </div>
+                <div ng-if="(dashboardScope.viewObjects[view] == null) && view.endsWith('html')"
+                     ng-include="'scripts/actions/' + view">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div ng-if="dashboardScope.dashboard.navigate && dashboardScope.dashboard.tabs.length>1">
+
+
+        <input ng-show="dashboardScope.activeTab>0" type="button" class="btn btn-primary pull-left" value="Previous"
+               ng-click="dashboardScope.previousTab()"/>
+        <input ng-show="dashboardScope.activeTab<dashboardScope.dashboard.tabs.length-1" type="button"
+               class="btn btn-primary pull-right" value="Next" ng-click="dashboardScope.nextTab()"
+               validation-submit="dashboardForm"/>
+
+    </div>
+
+
+</div>

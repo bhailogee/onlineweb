@@ -1,0 +1,138 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">Zone Policy Prefixes</h1>
+
+            <div ng-if="listpanel.gridOpts">
+                <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                     class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="ddPolicyRatingZonePrefixes" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click="updatePrevious(); displayPopUp = 'none';" type="button"
+                        ng-class="{'close':showasmodal}" data-dismiss="modal" aria-label="Close" class="ng-scope close">
+                    <span aria-hidden="true">×</span></button>
+                <h2 class="modal-title">Add Policy Rating Zone Prefix</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyID>Policy Rating Zone : </label>
+                    </div>
+                    <div class="col-sm-4">{{PolicyRatingZoneID}}</div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=DestPrefix>Destination Prefixes : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <textarea ng-model="DestPrefix" placeholder='1101,9213,0011'/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fnaddPolicyRatingZonePrefixes();">Insert<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input validation-reset="Form" value="Close" class="btn ng-scope" type="button" data-dismiss="modal"
+                       ng-click="updatePrevious(); displayPopUp = 'none';" aria-label="Close">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#ddPolicyRatingZonePrefixes">Add Policy Rating Zone Prefix
+    </button>
+
+    <button type="button" class="btn btn-primary" ng-click="displayImportPopUp = ''" data-toggle="modal"
+            data-target="#importZonePolicyPrefix">Import Policy Rating Zone Prefix
+    </button>
+
+</div>
+
+
+<div class="modal" style="display:{{displayImportPopUp}};" id="importZonePolicyPrefix" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayImportPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Import Rating Zone Policy Prefixes</h2>
+            </div>
+
+            <div class="modal-body" ng-show="fileReadBoolean == false">
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=PolicyID>Policy Rating Zone : </label>
+                    </div>
+                    <div class="col-sm-4">{{PolicyRatingZoneID}}</div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title="UploadCSV">Upload CSV File : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="file" fileread="allText"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-primary" type="button" ng-if="allText" ng-click="UploadFileCSV();">Upload
+                        File<span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"/>
+                </div>
+            </div>
+
+            <div class="modal-body" ng-show="fileReadBoolean == true">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div ng-if="listZonePrefixes.gridOpts">
+                            <div ui-grid="listZonePrefixes.gridOpts" ui-grid-pagination ui-grid-edit ui-grid-selection
+                                 ui-grid-exporter class="grid"></div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <!-- <p ng-if="errorRows">{{errorRows}}</p> -->
+                    <a class="btn btn-primary" type="button" ng-click="fnaddPolicyRatingZonePrefixes();">Import<span
+                            class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                           ng-click="fileReadBoolean = false"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

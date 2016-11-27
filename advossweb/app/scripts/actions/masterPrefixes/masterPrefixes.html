@@ -1,0 +1,53 @@
+<div class="modal" style="display:{{masterPrefixePopUp}};" id="enrich" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="masterPrefixePopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Master Prefixs By Prefix</h2>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4" style="text-align:center">
+                        <label title=EnrichmentTimeStamp>Prefix</label>
+                    </div>
+                    <div class="col-sm-4" style="text-align:center">
+                        <input type="text" ng-model="Prefix"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="PopulateMasterPrefixRates();" data-dismiss="modal">Populate<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="masterPrefixePopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">Master Prefixes</h1>
+
+            <div ng-if="listpanel.gridOpts">
+                <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                     class="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="masterPrefixePopUp = ''" data-toggle="modal"
+            data-target="#enrich">Master Prefixs By Prefix
+    </button>
+
+</div>

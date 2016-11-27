@@ -1,0 +1,60 @@
+<span ng-hide="menuItems">Loading...</span>
+
+<div class="menu menuwrapper" ng-show="menuItems">
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="menuSearchQuery" placeholder="Search">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+    </div>
+
+    <div class="treeview">
+
+        <nav class="vertically">
+            <div class="homemenu">
+                <a ui-sref="SearchSubscriber">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    <span class="glyphicon glyphicon-home"></span>
+                </a>
+            </div>
+
+            <ul>
+                <li ng-click="menuClicked($index,'parent')" ng-repeat="items in menuItemsFiltered1(menuSearchQuery)">
+
+                    <input type="checkbox" id="item-{{$index}}"/>
+
+                    <label for="item-{{$index}}">{{items.title}}
+                    </label>
+
+                    <ul ng-if="items.child.length>0">
+                        <li ng-click="menuClicked($index,'child',$event)" ng-repeat="c in items.child">
+
+                            <input type="checkbox" id="item-{{$parent.$index }}-{{$index}}"/>
+
+                            <label for="item-{{$parent.$index }}-{{$index}}">
+                                {{c.title}}
+                            </label>
+
+                            <ul ng-if="c.child.length>0">
+                                <li ng-click="menuClicked($index,'child',$event)" ng-repeat="cc in c.child">
+                                    <a style="color:#000000;" ui-sref="{{cc.state}}">
+                                        <span ng-if="!!!cc.iconPath" class="glyphicon glyphicon-file"></span>
+                                        <img ng-if="cc.iconPath" src="{{cc.iconPath}}"/>
+                                        {{cc.title}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="homemenufooter">
+
+                <a ui-sref="#">
+                    Powered By AdvOSS
+                </a>
+
+            </div>
+
+        </nav>
+    </div>
+</div>
+<!--ng-class="{'active' : ($index==selectedIndex[0] && 'child'==selectedIndex[1])}"-->

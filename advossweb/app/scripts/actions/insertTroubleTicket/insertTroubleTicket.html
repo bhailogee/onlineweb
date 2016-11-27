@@ -1,0 +1,75 @@
+<div class="modal" style="display:{{displayPopUp}};" id="insertTroubleTicket" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Insert Trouble Ticket</h2>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=Subject>Subject : </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="Subject" style="margin: 0px; width: 275px;"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=Subject>Description : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <textarea ng-model="Description" style="margin: 0px; width: 275px; height: 114px;"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=IssueTypeCategoryID>Issue Type Category : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="IssueTypeCategoryID" datasource="LS_issuetypecategories"
+                                            textfield="v_IssueTypeCategoryName"
+                                            valuefield="v_IssueTypeCategoryID"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=IssueTypeID>Issue Type : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="IssueTypeID" datasource="LS_issuetypes" textfield="v_IssueTypeName"
+                                            valuefield="v_IssueTypeID"></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fninsertTroubleTicket();">Create<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#insertTroubleTicket">Insert Trouble Ticket
+    </button>
+
+</div>

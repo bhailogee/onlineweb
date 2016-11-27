@@ -1,0 +1,130 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">Policy Rating Zone</h1>
+
+            <div ng-if="listpanel.gridOpts">
+                <div ui-grid="listpanel.gridOpts" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                     class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#insertPolicyRatingZone">Insert Policy Rating Zone
+    </button>
+
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="insertPolicyRatingZone" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button ng-click=" refreshPenal(); displayPopUp = 'none';" type="button"
+                        ng-class="{'close':showasmodal}" data-dismiss="modal" aria-label="Close" class="ng-scope close">
+                    <span aria-hidden="true">×</span></button>
+                <h2 class="modal-title">Insert Policy Rating Zone</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=PolicyID>Policy : </label>
+                    </div>
+
+                    <div class="col-sm-4">{{PolicyName}}</div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=ZoneName>Zone Name : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ZoneName"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="DurationBasedCharging">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=ConnCharges>Conn Charges : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ConnCharges"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="DurationBasedCharging">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=FirstInt>First Int : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="FirstInt"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row" ng-show="DurationBasedCharging">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=NextInt>Next Int : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="NextInt"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=ChargeHeadID>Charge Head : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="ChargeHeadID" datasource="LS_chargeheads"
+                                            textfield="v_ChargeHeadName" valuefield="v_ChargeHeadID"
+                                            isnull=true></dropdown-directive>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"/>
+                    <div class="col-sm-4">
+                        <label title=HasRatingClasses>Has Rating Classes : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="checkbox" ng-model="HasRatingClasses" ng-true-value="'1'" ng-false-value="'0'"/>
+                    </div>
+                    <div class="col-sm-2"/>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fninsertPolicyRatingZone();" data-dismiss="modal">Insert<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input validation-reset="Form" value="Close" class="btn ng-scope" type="button" data-dismiss="modal"
+                       ng-click="displayPopUp = 'none';" aria-label="Close">
+            </div>
+        </div>
+    </div>
+</div>

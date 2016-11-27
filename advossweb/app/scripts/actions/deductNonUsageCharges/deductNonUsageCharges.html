@@ -1,0 +1,80 @@
+<div class="modal" style="display:{{displayPopUp}};" id="deductNonUsageCharges" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Deduct Non Usage Charges</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=NonUsageChargeID>Non Usage Charge : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="NonUsageChargeID" datasource="LS_nonusagecharges"
+                                            textfield="v_NonUsageChargeName"
+                                            valuefield="v_NonUsageChargeID"></dropdown-directive>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=Amount>Amount : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="Amount"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=DeductInNoCredit>Deduct In No Credit : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="DeductInNoCredit"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ChargeHeadID>Charge Head : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="ChargeHeadID" datasource="LS_chargeheads"
+                                            textfield="v_ChargeHeadName" valuefield="v_ChargeHeadID"
+                                            isnull=true></dropdown-directive>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fndeductNonUsageCharges();">Update<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#deductNonUsageCharges">Deduct Non Usage Charges
+    </button>
+
+</div>

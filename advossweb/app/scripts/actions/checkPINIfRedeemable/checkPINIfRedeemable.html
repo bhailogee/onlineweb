@@ -1,0 +1,48 @@
+<div class="fieldset ng-scope" style="margin-top:20px;">
+    <h1 class="legend ng-binding"> Check PIN Redeemable </h1>
+
+    <div class="row" ng-show="returnCode == 0 || returnCode > 0" style="margin-top:20px;text-align:center;">
+        <div class="row" ng-show="returnCode == 0">
+            <div class="col-sm-12">
+                <h4 title=PIN class="glyphicon glyphicon-ok"> PIN Is Available. </h4>
+            </div>
+        </div>
+        <div class="row" ng-show="returnCode > 0">
+            <div class="col-sm-12">
+                <h4 title=PIN class="glyphicon glyphicon-remove"> PIN Is Not Available. </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4" style="text-align:center">
+            <label title=PIN> PIN : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="PIN" class="form-control input-sm"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4" style="text-align:center">
+            <label title=ABMFID> ABMF : </label>
+        </div>
+
+        <div class="col-sm-4">
+            <input type="text" ng-model="ABMFID" class="form-control input-sm"/>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6"/>
+        <div class="col-sm-6">
+            <a class="btn btn-primary" type="button" ng-click="fncheckPINIfRedeemable();">Check<span
+                    class="glyphicon glyphicon-ok"></span></a>
+        </div>
+    </div>
+</div>

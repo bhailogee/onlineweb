@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="text-align: center;margin-bottom:20px">
+
+            <img ng-src="images/logo1.png" alt="Description"/>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="color: #D25421;font-weight: bold;">Please Sign In</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" autocomplete="on">
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" ng-model="loginName"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" ng-model="password"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="hidden" ng-model="remoteIP"/>
+                        </div>
+                        <!-- <div class="checkbox">
+                            <label>
+                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                            </label>
+                        </div> -->
+                        <!-- Change this to a button or input when using this as a form -->
+                        <input class="btn btn-lg btn-block" style="background-color: #282193; color: white;"
+                               type="submit" value="Login" ng-click="fnLoginSubmit();"/>
+
+                        <div ng-show="isValidated">
+                            <label>User Name {{loginName}} is verified</label>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

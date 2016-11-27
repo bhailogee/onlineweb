@@ -1,0 +1,65 @@
+<form name="Form">
+    <div class="fieldset">
+
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=Amount>Amount : </label>
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" ng-model="Amount"/>
+
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=InstrumentNumber>Instrument Number : </label>
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" ng-model="InstrumentNumber"/>
+
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+
+            <div class="row" ng-if="ifshow">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=PaymentMode>Payment Mode : </label>
+                </div>
+
+                <div class="col-sm-4">
+                    <dropdown-directive refresh=true model="PaymentModeID" datasource="{{PaymentModes}}"
+                                        textfield="value" valuefield="ID"></dropdown-directive>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=Remarks>Remarks : </label>
+                </div>
+
+                <div class="col-sm-4">
+                    <textarea ng-model="Remarks"/>
+
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+            <!--<div class="row"><div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <label title=RemoteIP>Remote I P : </label>
+                </div>
+
+                <div class="col-sm-4"><input type="text" ng-model="RemoteIP"  />
+                <div class="col-sm-2"></div></div>
+            </div>-->
+        </div>
+    </div>
+</form>

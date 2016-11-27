@@ -1,0 +1,34 @@
+<div class="modal" style="display:{{displayPopUp}};" id="insTroubleTicketAssignment" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title"></h2>
+            </div>
+
+            <div class="modal-body">
+                Are you sure ?
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fninsTroubleTicketAssignment();">Yes<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="showbtns">
+    <div class="ng-scope" style="float: right;">
+        <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+                data-target="#insTroubleTicketAssignment">Roll Back
+        </button>
+
+        <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+                data-target="#insTroubleTicketAssignment">RePlay
+        </button>
+    </div>
+</div>

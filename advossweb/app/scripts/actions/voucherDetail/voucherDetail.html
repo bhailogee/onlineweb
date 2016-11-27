@@ -1,0 +1,199 @@
+<div class="fieldset ng-scope" style="margin-top:20px;">
+    <h1 class="legend ng-binding"> Voucher Lookup </h1>
+
+    <div class="row">
+        <div class="col-sm-2"/>
+        <div class="col-sm-4">
+            <label title=SearchVoucherBy> Search Voucher By: </label>
+        </div>
+
+        <div class="col-sm-4">
+            <dropdown-directive model="VouchersType" datasource="{{voucherType}}" textfield="text"
+                                valuefield="indexValue" isnull=true></dropdown-directive>
+        </div>
+        <div class="col-sm-2"/>
+    </div>
+
+    <div ng-show="VouchersType=='PIN'">
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=VoucherPin> Voucher Pin: </label>
+            </div>
+
+            <div class="col-sm-4">
+                <input type="text" ng-model="VoucherPin"/>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+    </div>
+
+    <div ng-show="VouchersType=='Serial Number'">
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SerialPrefix> Serial Prefix: </label>
+            </div>
+
+            <div class="col-sm-4">
+                <input type="text" ng-model="SerialPrefix"/>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SerialNumber> Serial Number: </label>
+            </div>
+
+            <div class="col-sm-4">
+                <input type="text" ng-model="SerialNumber"/>
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+    </div>
+    <br/>
+
+    <div ng-show="responseVoucherDetails.v_ReturnCode=='0'">
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-6">
+                <h3 style="text-align:center">Voucher Details</h3>
+            </div>
+        </div>
+
+        <div class="row" ng-hide="VouchersType=='Serial Number'">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SerialPrefix> Serial Prefix: </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{responseVoucherDetails.v_SerialPrefix}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row" ng-hide="VouchersType=='Serial Number'">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SerialNumber> Serial Number: </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{responseVoucherDetails.v_SerialNo}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=Status> Status: </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{responseVoucherDetails.Status}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=Amount> Amount: </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{responseVoucherDetails.v_Amount}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=SellingDate> Selling Date: </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{responseVoucherDetails.v_SellingDate | date : 'MMM dd yyyy'}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=RedemptionDate> Redemption Date: </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{responseVoucherDetails.v_ActivationDate | date : 'MMM dd yyyy'}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"/>
+            <div class="col-sm-4">
+                <label title=ExpiryDate> Expiry Date: </label>
+            </div>
+
+            <div class="col-sm-4">
+                {{responseVoucherDetails.v_CardExpiryDate}}
+            </div>
+            <div class="col-sm-2"/>
+        </div>
+
+        <div ng-show="responseVoucherDetails.v_Active == 16">
+            <div class="row">
+                <div class="col-sm-2"/>
+                <div class="col-sm-6">
+                    <h4 style="text-align:center">Redeemed by</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"/>
+                <div class="col-sm-4">
+                    <label title=ABMF> ABMF: </label>
+                </div>
+
+                <div class="col-sm-4">
+                    {{responseVoucherDetails.v_SoldToABMFID}}
+                </div>
+                <div class="col-sm-2"/>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"/>
+                <div class="col-sm-4">
+                    <label title=SubscriberID> SubscriberID: </label>
+                </div>
+
+                <div class="col-sm-4">
+                    {{responseVoucherDetails.v_SubscriberID}}
+                </div>
+                <div class="col-sm-2"/>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"/>
+                <div class="col-sm-4">
+                    <label title=UserName> UserName: </label>
+                </div>
+
+                <div class="col-sm-4">
+                    {{responseVoucherDetails.v_UserName}}
+                </div>
+                <div class="col-sm-2"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6"/>
+        <div class="col-sm-6">
+            <a class="btn btn-primary" type="button" ng-click="voucherDetails();">Get Detail <span
+                    class="glyphicon glyphicon-ok"></span></a>
+        </div>
+    </div>
+</div>

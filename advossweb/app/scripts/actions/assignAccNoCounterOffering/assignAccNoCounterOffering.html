@@ -1,0 +1,175 @@
+<div style="margin-left:10px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="heading ng-binding">AccNo Counter Offering</h1>
+
+            <div ng-if="listaccnocounterofferingpanel.gridOpts">
+                <div ui-grid="listaccnocounterofferingpanel.gridOpts" ui-grid-pagination ui-grid-selection
+                     ui-grid-exporter class="grid"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ng-scope">
+    <br/><br/>
+    <button type="button" class="btn btn-primary" ng-click="displayPopUp = ''" data-toggle="modal"
+            data-target="#assignAccNoCounterOffering">Assign AccNo Counter Offering
+    </button>
+
+</div>
+
+<div class="modal" style="display:{{displayPopUp}};" id="assignAccNoCounterOffering" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="ng-scope close" type="button" ng-class="close" data-dismiss="modal" aria-label="Close"
+                        ng-click="displayPopUp = 'none'"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Assign AccNo Counter Offering</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=CounterOfferingID>Counter Offering : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="CounterOfferingID" datasource="LS_counterofferings"
+                                            textfield="v_CounterOfferingName"
+                                            valuefield="v_CounterOfferingID"></dropdown-directive>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=SubscriptionID>Subscription : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <dropdown-directive model="SubscriptionID" datasource="LS_subscriptions"
+                                            textfield="v_SubscriptionType"
+                                            valuefield="v_SubscriptionID"></dropdown-directive>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ChargesPerBillingCycle>Charges Per Billing Cycle : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ChargesPerBillingCycle"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ChargesPerBillingCycleExpiry>Charges Per Billing Cycle Expiry : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <a class="dropdown-toggle" id="{{ChargesPerBillingCycleExpiry+'_dropdown1'}}" role="button"
+                           data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       ng-model="ChargesPerBillingCycleExpiry = (ChargesPerBillingCycleExpiry | date:'yyyy-MM-dd HH:mm:ss')"/>
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                            </div>
+                        </a>
+                                    <span class="input-group-addon" ng-click="param.value=''">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                    </span>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="ChargesPerBillingCycleExpiry"
+                                            data-datetimepicker-config="{dropdownSelector: '#dropdown1' }"/>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=ActivationCharges>Activation Charges : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="ActivationCharges"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=Expiration>Expiration : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        <a class="dropdown-toggle" id="{{Expiration+'_dropdown1'}}" role="button"
+                           data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       ng-model="Expiration = (Expiration | date:'yyyy-MM-dd HH:mm:ss')"/>
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                            </div>
+                        </a>
+                                    <span class="input-group-addon" ng-click="param.value=''">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                    </span>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="Expiration"
+                                            data-datetimepicker-config="{dropdownSelector: '#dropdown1' }"/>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=MaxTotalUnits>Max Total Units : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="MaxTotalUnits"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <label title=IsRollOverRemainingUnits>Is Roll Over Remaining Units : </label>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="checkbox" ng-model="IsRollOverRemainingUnits"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" type="button" ng-click="fnassignAccNoCounterOffering();">Assign<span
+                        class="glyphicon glyphicon-ok"></span>
+                </a>
+                <input value="Close" class="btn" type="button" data-dismiss="modal" aria-label="Close"
+                       ng-click="displayPopUp = 'none'"/>
+            </div>
+        </div>
+    </div>
+</div>
